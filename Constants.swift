@@ -10,7 +10,16 @@ import Foundation
 
 struct K {
     
+    struct Segues {
+        static let toMainViewControllet = "toMainVC"
+    }
+    
     struct Storyboard {
          static let mainViewContoller = "MainVC"
+    }
+    
+    struct Image {
+        static let eyeSlash = "eye.slash"
+        static let eye = "eye"
     }
 }

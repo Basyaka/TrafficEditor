@@ -14,16 +14,17 @@
 		366ED2CC251BB139007AE2D4 /* TrafficEditor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2CA251BB139007AE2D4 /* TrafficEditor.xcdatamodeld */; };
 		366ED2CE251BB13E007AE2D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 366ED2CD251BB13E007AE2D4 /* Assets.xcassets */; };
 		366ED2D1251BB13E007AE2D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 366ED2CF251BB13E007AE2D4 /* LaunchScreen.storyboard */; };
-		366ED2DD251BB5A1007AE2D4 /* LoginAndRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2DC251BB5A1007AE2D4 /* LoginAndRegistrationViewController.swift */; };
-		366ED2DF251BB803007AE2D4 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2DE251BB803007AE2D4 /* ContactViewController.swift */; };
 		366ED2E1251BB81E007AE2D4 /* CategoryRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2E0251BB81E007AE2D4 /* CategoryRouteViewController.swift */; };
 		366ED2E3251BBD21007AE2D4 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2E2251BBD21007AE2D4 /* Utilities.swift */; };
 		366ED2E6251BBD4D007AE2D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2E5251BBD4D007AE2D4 /* Constants.swift */; };
 		3688B351251BC59100AB35B4 /* Users+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */; };
 		3688B352251BC59100AB35B4 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */; };
-		36E408A5251BDD88006BC58D /* PasswordParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E408A4251BDD88006BC58D /* PasswordParameters.swift */; };
+		36C4B870254D96470065BB5F /* LoginAndRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B86F254D96470065BB5F /* LoginAndRegistrationViewController.swift */; };
+		36C4B873254D96550065BB5F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B872254D96550065BB5F /* ContactViewController.swift */; };
+		36C4B8A9254E0E740065BB5F /* GIfLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B8A8254E0E740065BB5F /* GIfLogic.swift */; };
+		36C4B8C1254E21C60065BB5F /* flow.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36C4B8C0254E21C60065BB5F /* flow.gif */; };
+		36E408A5251BDD88006BC58D /* ValidateParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E408A4251BDD88006BC58D /* ValidateParameters.swift */; };
 		36E408A7251C07E0006BC58D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E408A6251C07E0006BC58D /* MainViewController.swift */; };
-		36E408B2251C1527006BC58D /* loginbg.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 36E408B1251C1527006BC58D /* loginbg.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,16 +37,17 @@
 		366ED2CD251BB13E007AE2D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		366ED2D0251BB13E007AE2D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		366ED2D2251BB13E007AE2D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		366ED2DC251BB5A1007AE2D4 /* LoginAndRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginAndRegistrationViewController.swift; path = TrafficEditor/View/LoginAndRegistrationViewController.swift; sourceTree = SOURCE_ROOT; };
-		366ED2DE251BB803007AE2D4 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactViewController.swift; path = TrafficEditor/View/ContactViewController.swift; sourceTree = SOURCE_ROOT; };
 		366ED2E0251BB81E007AE2D4 /* CategoryRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRouteViewController.swift; sourceTree = "<group>"; };
 		366ED2E2251BBD21007AE2D4 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		366ED2E5251BBD4D007AE2D4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = SOURCE_ROOT; };
 		3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		36E408A4251BDD88006BC58D /* PasswordParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordParameters.swift; sourceTree = "<group>"; };
+		36C4B86F254D96470065BB5F /* LoginAndRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAndRegistrationViewController.swift; sourceTree = "<group>"; };
+		36C4B872254D96550065BB5F /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		36C4B8A8254E0E740065BB5F /* GIfLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIfLogic.swift; sourceTree = "<group>"; };
+		36C4B8C0254E21C60065BB5F /* flow.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = flow.gif; path = ../../../../../Downloads/flow.gif; sourceTree = "<group>"; };
+		36E408A4251BDD88006BC58D /* ValidateParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateParameters.swift; sourceTree = "<group>"; };
 		36E408A6251C07E0006BC58D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		36E408B1251C1527006BC58D /* loginbg.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginbg.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,46 +80,24 @@
 		366ED2C0251BB139007AE2D4 /* TrafficEditor */ = {
 			isa = PBXGroup;
 			children = (
-				366ED2C1251BB139007AE2D4 /* AppDelegate.swift */,
-				366ED2C3251BB139007AE2D4 /* SceneDelegate.swift */,
-				366ED2D9251BB4F8007AE2D4 /* Model */,
-				366ED2DA251BB4FD007AE2D4 /* View */,
-				366ED2DB251BB507007AE2D4 /* Controller */,
+				36AF1FBA254D9415006DFFA8 /* Application */,
+				36C4B88D254DC3EF0065BB5F /* Start */,
+				36AF1FC0254D946A006DFFA8 /* LoginAndRegistration */,
+				36C4B88E254DC4070065BB5F /* Main */,
+				36C4B890254DC4250065BB5F /* Contacts */,
+				36C4B896254DC4860065BB5F /* Category */,
+				36AF1FB9254D93E3006DFFA8 /* CoreData */,
 				366ED2E4251BBD32007AE2D4 /* Helpers */,
 				36E408A8251C0B70006BC58D /* Media */,
-				366ED2CD251BB13E007AE2D4 /* Assets.xcassets */,
-				366ED2CF251BB13E007AE2D4 /* LaunchScreen.storyboard */,
-				366ED2D2251BB13E007AE2D4 /* Info.plist */,
+				36C4B898254DC4D80065BB5F /* Supporting files */,
 			);
 			path = TrafficEditor;
-			sourceTree = "<group>";
-		};
-		366ED2D9251BB4F8007AE2D4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */,
-				3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */,
-				366ED2CA251BB139007AE2D4 /* TrafficEditor.xcdatamodeld */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		366ED2DA251BB4FD007AE2D4 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				366ED2C7251BB139007AE2D4 /* Main.storyboard */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		366ED2DB251BB507007AE2D4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				366ED2C5251BB139007AE2D4 /* StartViewController.swift */,
-				366ED2DC251BB5A1007AE2D4 /* LoginAndRegistrationViewController.swift */,
-				36E408A6251C07E0006BC58D /* MainViewController.swift */,
-				366ED2DE251BB803007AE2D4 /* ContactViewController.swift */,
-				366ED2E0251BB81E007AE2D4 /* CategoryRouteViewController.swift */,
+				36C4B86F254D96470065BB5F /* LoginAndRegistrationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -127,15 +107,150 @@
 			children = (
 				366ED2E2251BBD21007AE2D4 /* Utilities.swift */,
 				366ED2E5251BBD4D007AE2D4 /* Constants.swift */,
-				36E408A4251BDD88006BC58D /* PasswordParameters.swift */,
+				36E408A4251BDD88006BC58D /* ValidateParameters.swift */,
+				36C4B8A8254E0E740065BB5F /* GIfLogic.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		36AF1FB9254D93E3006DFFA8 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2CA251BB139007AE2D4 /* TrafficEditor.xcdatamodeld */,
+				36AF1FC4254D957B006DFFA8 /* CoreDataClass */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		36AF1FBA254D9415006DFFA8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				36AF1FBD254D942C006DFFA8 /* View */,
+				36AF1FBB254D941D006DFFA8 /* Controller */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		36AF1FBB254D941D006DFFA8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2C1251BB139007AE2D4 /* AppDelegate.swift */,
+				366ED2C3251BB139007AE2D4 /* SceneDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		36AF1FBD254D942C006DFFA8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2C7251BB139007AE2D4 /* Main.storyboard */,
+				366ED2CF251BB13E007AE2D4 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		36AF1FC0254D946A006DFFA8 /* LoginAndRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2DB251BB507007AE2D4 /* Controller */,
+			);
+			path = LoginAndRegistration;
+			sourceTree = "<group>";
+		};
+		36AF1FC2254D9557006DFFA8 /* LoginAndRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */,
+				3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */,
+			);
+			path = LoginAndRegistration;
+			sourceTree = "<group>";
+		};
+		36AF1FC4254D957B006DFFA8 /* CoreDataClass */ = {
+			isa = PBXGroup;
+			children = (
+				36AF1FC2254D9557006DFFA8 /* LoginAndRegistration */,
+			);
+			path = CoreDataClass;
+			sourceTree = "<group>";
+		};
+		36C4B88D254DC3EF0065BB5F /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				36C4B88F254DC41A0065BB5F /* Controller */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		36C4B88E254DC4070065BB5F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				36C4B895254DC46E0065BB5F /* Contoller */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		36C4B88F254DC41A0065BB5F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2C5251BB139007AE2D4 /* StartViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		36C4B890254DC4250065BB5F /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				36C4B891254DC43A0065BB5F /* Controller */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		36C4B891254DC43A0065BB5F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				36C4B872254D96550065BB5F /* ContactViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		36C4B895254DC46E0065BB5F /* Contoller */ = {
+			isa = PBXGroup;
+			children = (
+				36E408A6251C07E0006BC58D /* MainViewController.swift */,
+			);
+			path = Contoller;
+			sourceTree = "<group>";
+		};
+		36C4B896254DC4860065BB5F /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				36C4B897254DC4A20065BB5F /* Contoller */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		36C4B897254DC4A20065BB5F /* Contoller */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2E0251BB81E007AE2D4 /* CategoryRouteViewController.swift */,
+			);
+			path = Contoller;
+			sourceTree = "<group>";
+		};
+		36C4B898254DC4D80065BB5F /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2CD251BB13E007AE2D4 /* Assets.xcassets */,
+				366ED2D2251BB13E007AE2D4 /* Info.plist */,
+			);
+			path = "Supporting files";
 			sourceTree = "<group>";
 		};
 		36E408A8251C0B70006BC58D /* Media */ = {
 			isa = PBXGroup;
 			children = (
-				36E408B1251C1527006BC58D /* loginbg.mp4 */,
+				36C4B8C0254E21C60065BB5F /* flow.gif */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -167,7 +282,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Vlad Novik";
 				TargetAttributes = {
 					366ED2BD251BB139007AE2D4 = {
@@ -199,7 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				366ED2D1251BB13E007AE2D4 /* LaunchScreen.storyboard in Resources */,
-				36E408B2251C1527006BC58D /* loginbg.mp4 in Resources */,
+				36C4B8C1254E21C60065BB5F /* flow.gif in Resources */,
 				366ED2CE251BB13E007AE2D4 /* Assets.xcassets in Resources */,
 				366ED2C9251BB139007AE2D4 /* Main.storyboard in Resources */,
 			);
@@ -212,17 +327,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				366ED2DD251BB5A1007AE2D4 /* LoginAndRegistrationViewController.swift in Sources */,
 				36E408A7251C07E0006BC58D /* MainViewController.swift in Sources */,
+				36C4B8A9254E0E740065BB5F /* GIfLogic.swift in Sources */,
+				36C4B873254D96550065BB5F /* ContactViewController.swift in Sources */,
 				366ED2E1251BB81E007AE2D4 /* CategoryRouteViewController.swift in Sources */,
 				366ED2CC251BB139007AE2D4 /* TrafficEditor.xcdatamodeld in Sources */,
 				366ED2C6251BB139007AE2D4 /* StartViewController.swift in Sources */,
 				366ED2C2251BB139007AE2D4 /* AppDelegate.swift in Sources */,
 				3688B352251BC59100AB35B4 /* Users+CoreDataProperties.swift in Sources */,
-				36E408A5251BDD88006BC58D /* PasswordParameters.swift in Sources */,
+				36E408A5251BDD88006BC58D /* ValidateParameters.swift in Sources */,
 				366ED2C4251BB139007AE2D4 /* SceneDelegate.swift in Sources */,
+				36C4B870254D96470065BB5F /* LoginAndRegistrationViewController.swift in Sources */,
 				366ED2E3251BBD21007AE2D4 /* Utilities.swift in Sources */,
-				366ED2DF251BB803007AE2D4 /* ContactViewController.swift in Sources */,
 				3688B351251BC59100AB35B4 /* Users+CoreDataClass.swift in Sources */,
 				366ED2E6251BBD4D007AE2D4 /* Constants.swift in Sources */,
 			);
@@ -276,6 +392,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -336,6 +453,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -370,7 +488,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WQ74PM97F4;
-				INFOPLIST_FILE = TrafficEditor/Info.plist;
+				INFOPLIST_FILE = "TrafficEditor/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,7 +496,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vlad.novik.TrafficEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -388,7 +506,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WQ74PM97F4;
-				INFOPLIST_FILE = TrafficEditor/Info.plist;
+				INFOPLIST_FILE = "TrafficEditor/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -396,7 +514,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vlad.novik.TrafficEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "AF48573F-AEF1-4514-B49C-C6B9AFC573C4"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21ACC858-A484-47F1-B4BA-AC156DBE13DD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrafficEditor/View/LoginAndRegistrationViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "validateFieldsForRegistration()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5669923F-7215-403A-9EC5-D4C4B00FEEDC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrafficEditor/View/LoginAndRegistrationViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "validateFieldsForRegistration()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46B66423-FACA-4AEB-9B78-59F22FBDA2DB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrafficEditor/View/LoginAndRegistrationViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "validateFieldsForRegistration()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9361173F-774C-4FF8-ADC6-1CA001700C21"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrafficEditor/Start/Controller/StartViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "StartViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "9361173F-774C-4FF8-ADC6-1CA001700C21 - 81b4d4fbb1315d9e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrafficEditor.StartViewController.previewLabel.getter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "TrafficEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladnovik/Library/Autosave%20Information/TrafficEditor/TrafficEditor/Start/Controller/StartViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "88">
+               </Location>
+               <Location
+                  uuid = "9361173F-774C-4FF8-ADC6-1CA001700C21 - c46d3e9a48fbf9aa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrafficEditor.StartViewController.previewLabel.setter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "TrafficEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladnovik/Library/Autosave%20Information/TrafficEditor/TrafficEditor/Start/Controller/StartViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "155">
+               </Location>
+               <Location
+                  uuid = "9361173F-774C-4FF8-ADC6-1CA001700C21 - 287bae928cdf828d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrafficEditor.StartViewController.previewLabel.modify : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "TrafficEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladnovik/Library/Autosave%20Information/TrafficEditor/TrafficEditor/Start/Controller/StartViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "59">
+               </Location>
+               <Location
+                  uuid = "9361173F-774C-4FF8-ADC6-1CA001700C21 - 69e3170304d3263d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrafficEditor.StartViewController.previewLabel.modify : Swift.Optional&lt;__C.UILabel&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "TrafficEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladnovik/Library/Autosave%20Information/TrafficEditor/TrafficEditor/Start/Controller/StartViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "9361173F-774C-4FF8-ADC6-1CA001700C21 - 48057207d82526a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrafficEditor.StartViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; TrafficEditor.StartViewController"
+                  moduleName = "TrafficEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladnovik/Library/Autosave%20Information/TrafficEditor/TrafficEditor/Start/Controller/StartViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "466">
+               </Location>
+               <Location
+                  uuid = "9361173F-774C-4FF8-ADC6-1CA001700C21 - bb17e9b86ff100dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "TrafficEditor.StartViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;TrafficEditor.StartViewController&gt;"
+                  moduleName = "TrafficEditor"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/vladnovik/Library/Autosave%20Information/TrafficEditor/TrafficEditor/Start/Controller/StartViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "407">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
