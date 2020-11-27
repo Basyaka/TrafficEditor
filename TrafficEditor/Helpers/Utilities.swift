@@ -28,6 +28,18 @@ class Utilities {
         
     }
     
+    static func styleLabel(_ label: UILabel) {
+        // Create the bottom line
+        let bottomLine = CALayer()
+        
+        bottomLine.frame = CGRect(x: 0, y: label.frame.height - 2, width: label.frame.width, height: 2)
+        
+        bottomLine.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1).cgColor
+        
+        // Add the line to the label
+        label.layer.addSublayer(bottomLine)
+    }
+    
     static func styleForStack(_ stack: UIStackView) {
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0, y: stack.frame.height - 2, width: stack.frame.width, height: 2)
@@ -50,5 +62,9 @@ class Utilities {
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.black
+    }
+    
+    static func parametersPlaceholder(textField textFieldOutlet: UITextField, textPlaceholder: String, color: UIColor) {
+        textFieldOutlet.attributedPlaceholder = NSAttributedString(string: textPlaceholder, attributes: [NSAttributedString.Key.foregroundColor: color])
     }
 }

@@ -11,7 +11,35 @@ import Foundation
 struct K {
     
     struct Segues {
-        static let toMainViewControllet = "toMainVC"
+        
+        static let toMainViewController = "toMainVC"
+        static let fromCategoryToRoute = "fromCategoryToRoute"
+        
+        struct RouteVC {
+            static let fromRouteToViewRoute = "fromRouteToViewRoute"
+            static let fromRouteToEditingRoute = "fromRouteToEditRoute"
+        }
+        
+        struct ContactVC {
+            static let fromContactToCreateContact = "fromContactToCreateContact"
+            static let fromContactToViewAndEditContact = "fromContactToViewAndEditContact"
+        }
+        
+        struct CargoVC {
+            static let fromCargoToViewCargo = "fromCargoToViewCargo"
+            static let fromCargoToEditCargo = "fromCargoToEditCargo"
+        }
+        
+        struct CarVC {
+            static let fromCarToViewCar = "fromCarToViewCar"
+            static let stafromCarToEditCar = "fromCarToEditCar"
+        }
+        
+    }
+    
+    struct Cells {
+        static let categoryCell = "CategoryCell"
+        static let contactCell = "ContactCell"
     }
     
     struct Storyboard {

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36259EE3255418D70081B6CA /* ContactViewAndEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259EE2255418D70081B6CA /* ContactViewAndEditViewController.swift */; };
+		36259EE6255418E70081B6CA /* ContactCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259EE5255418E70081B6CA /* ContactCreateViewController.swift */; };
+		36259EE9255419460081B6CA /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259EE8255419460081B6CA /* RouteViewController.swift */; };
+		36259EEC2554197B0081B6CA /* RouteViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259EEB2554197B0081B6CA /* RouteViewViewController.swift */; };
+		36259EEF255419860081B6CA /* RouteEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259EEE255419860081B6CA /* RouteEditViewController.swift */; };
+		36259EFE25541A0E0081B6CA /* CargoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259EFD25541A0E0081B6CA /* CargoViewController.swift */; };
+		36259F0225541A180081B6CA /* CargoViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259F0125541A180081B6CA /* CargoViewViewController.swift */; };
+		36259F0525541A220081B6CA /* CargoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259F0425541A220081B6CA /* CargoEditViewController.swift */; };
+		36259F0825561CD50081B6CA /* CategoryRouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259F0725561CD40081B6CA /* CategoryRouteTableViewCell.swift */; };
+		36259F0C25561FFE0081B6CA /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259F0A25561FFE0081B6CA /* Category+CoreDataClass.swift */; };
+		36259F0D25561FFE0081B6CA /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36259F0B25561FFE0081B6CA /* Category+CoreDataProperties.swift */; };
 		366ED2C2251BB139007AE2D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2C1251BB139007AE2D4 /* AppDelegate.swift */; };
 		366ED2C4251BB139007AE2D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2C3251BB139007AE2D4 /* SceneDelegate.swift */; };
 		366ED2C6251BB139007AE2D4 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2C5251BB139007AE2D4 /* StartViewController.swift */; };
@@ -19,15 +30,32 @@
 		366ED2E6251BBD4D007AE2D4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366ED2E5251BBD4D007AE2D4 /* Constants.swift */; };
 		3688B351251BC59100AB35B4 /* Users+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */; };
 		3688B352251BC59100AB35B4 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */; };
+		36BB443A2571AF9D00A65D2E /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB44382571AF9D00A65D2E /* Contact+CoreDataClass.swift */; };
+		36BB443B2571AF9D00A65D2E /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB44392571AF9D00A65D2E /* Contact+CoreDataProperties.swift */; };
+		36BB443F2571BAA600A65D2E /* RefactoringContactDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB443E2571BAA600A65D2E /* RefactoringContactDataModel.swift */; };
 		36C4B870254D96470065BB5F /* LoginAndRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B86F254D96470065BB5F /* LoginAndRegistrationViewController.swift */; };
 		36C4B873254D96550065BB5F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B872254D96550065BB5F /* ContactViewController.swift */; };
 		36C4B8A9254E0E740065BB5F /* GIfLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B8A8254E0E740065BB5F /* GIfLogic.swift */; };
 		36C4B8C1254E21C60065BB5F /* flow.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36C4B8C0254E21C60065BB5F /* flow.gif */; };
+		36C779A6256D57150055A43A /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C779A5256D57150055A43A /* ContactTableViewCell.swift */; };
+		36DBBA46256D90A400735717 /* ContactCoreDataMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DBBA45256D90A400735717 /* ContactCoreDataMethods.swift */; };
+		36DBBA4B256DB05000735717 /* ContactEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DBBA4A256DB05000735717 /* ContactEditViewController.swift */; };
 		36E408A5251BDD88006BC58D /* ValidateParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E408A4251BDD88006BC58D /* ValidateParameters.swift */; };
 		36E408A7251C07E0006BC58D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E408A6251C07E0006BC58D /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36259EE2255418D70081B6CA /* ContactViewAndEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewAndEditViewController.swift; sourceTree = "<group>"; };
+		36259EE5255418E70081B6CA /* ContactCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCreateViewController.swift; sourceTree = "<group>"; };
+		36259EE8255419460081B6CA /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
+		36259EEB2554197B0081B6CA /* RouteViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewViewController.swift; sourceTree = "<group>"; };
+		36259EEE255419860081B6CA /* RouteEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEditViewController.swift; sourceTree = "<group>"; };
+		36259EFD25541A0E0081B6CA /* CargoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoViewController.swift; sourceTree = "<group>"; };
+		36259F0125541A180081B6CA /* CargoViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoViewViewController.swift; sourceTree = "<group>"; };
+		36259F0425541A220081B6CA /* CargoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoEditViewController.swift; sourceTree = "<group>"; };
+		36259F0725561CD40081B6CA /* CategoryRouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRouteTableViewCell.swift; sourceTree = "<group>"; };
+		36259F0A25561FFE0081B6CA /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
+		36259F0B25561FFE0081B6CA /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		366ED2BE251BB139007AE2D4 /* TrafficEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrafficEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		366ED2C1251BB139007AE2D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		366ED2C3251BB139007AE2D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,10 +70,16 @@
 		366ED2E5251BBD4D007AE2D4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = SOURCE_ROOT; };
 		3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		36BB44382571AF9D00A65D2E /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataClass.swift"; sourceTree = "<group>"; };
+		36BB44392571AF9D00A65D2E /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		36BB443E2571BAA600A65D2E /* RefactoringContactDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefactoringContactDataModel.swift; sourceTree = "<group>"; };
 		36C4B86F254D96470065BB5F /* LoginAndRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAndRegistrationViewController.swift; sourceTree = "<group>"; };
 		36C4B872254D96550065BB5F /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		36C4B8A8254E0E740065BB5F /* GIfLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIfLogic.swift; sourceTree = "<group>"; };
 		36C4B8C0254E21C60065BB5F /* flow.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = flow.gif; path = ../../../../../Downloads/flow.gif; sourceTree = "<group>"; };
+		36C779A5256D57150055A43A /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		36DBBA45256D90A400735717 /* ContactCoreDataMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCoreDataMethods.swift; sourceTree = "<group>"; };
+		36DBBA4A256DB05000735717 /* ContactEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEditViewController.swift; sourceTree = "<group>"; };
 		36E408A4251BDD88006BC58D /* ValidateParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateParameters.swift; sourceTree = "<group>"; };
 		36E408A6251C07E0006BC58D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,6 +95,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36259EDD255418470081B6CA /* Cargo */ = {
+			isa = PBXGroup;
+			children = (
+				36F1DEA2256D7D3200BFCD79 /* Model */,
+				36259EFC255419D90081B6CA /* Controller */,
+			);
+			path = Cargo;
+			sourceTree = "<group>";
+		};
+		36259EDE255418590081B6CA /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				36F1DEA0256D7CF600BFCD79 /* Model */,
+				36259EE1255418910081B6CA /* Controller */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
+		36259EE1255418910081B6CA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				36259EE8255419460081B6CA /* RouteViewController.swift */,
+				36259EEB2554197B0081B6CA /* RouteViewViewController.swift */,
+				36259EEE255419860081B6CA /* RouteEditViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		36259EFC255419D90081B6CA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				36259EFD25541A0E0081B6CA /* CargoViewController.swift */,
+				36259F0125541A180081B6CA /* CargoViewViewController.swift */,
+				36259F0425541A220081B6CA /* CargoEditViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		366ED2B5251BB139007AE2D4 = {
 			isa = PBXGroup;
 			children = (
@@ -84,8 +156,10 @@
 				36C4B88D254DC3EF0065BB5F /* Start */,
 				36AF1FC0254D946A006DFFA8 /* LoginAndRegistration */,
 				36C4B88E254DC4070065BB5F /* Main */,
-				36C4B890254DC4250065BB5F /* Contacts */,
-				36C4B896254DC4860065BB5F /* Category */,
+				36C4B890254DC4250065BB5F /* Contact */,
+				36F1DE9D256D7CB500BFCD79 /* Category */,
+				36259EDE255418590081B6CA /* Route */,
+				36259EDD255418470081B6CA /* Cargo */,
 				36AF1FB9254D93E3006DFFA8 /* CoreData */,
 				366ED2E4251BBD32007AE2D4 /* Helpers */,
 				36E408A8251C0B70006BC58D /* Media */,
@@ -117,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				366ED2CA251BB139007AE2D4 /* TrafficEditor.xcdatamodeld */,
-				36AF1FC4254D957B006DFFA8 /* CoreDataClass */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -152,26 +225,10 @@
 		36AF1FC0254D946A006DFFA8 /* LoginAndRegistration */ = {
 			isa = PBXGroup;
 			children = (
+				36F1DEA1256D7D0800BFCD79 /* Model */,
 				366ED2DB251BB507007AE2D4 /* Controller */,
 			);
 			path = LoginAndRegistration;
-			sourceTree = "<group>";
-		};
-		36AF1FC2254D9557006DFFA8 /* LoginAndRegistration */ = {
-			isa = PBXGroup;
-			children = (
-				3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */,
-				3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */,
-			);
-			path = LoginAndRegistration;
-			sourceTree = "<group>";
-		};
-		36AF1FC4254D957B006DFFA8 /* CoreDataClass */ = {
-			isa = PBXGroup;
-			children = (
-				36AF1FC2254D9557006DFFA8 /* LoginAndRegistration */,
-			);
-			path = CoreDataClass;
 			sourceTree = "<group>";
 		};
 		36C4B88D254DC3EF0065BB5F /* Start */ = {
@@ -198,18 +255,23 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		36C4B890254DC4250065BB5F /* Contacts */ = {
+		36C4B890254DC4250065BB5F /* Contact */ = {
 			isa = PBXGroup;
 			children = (
+				36F1DE9C256D7C8A00BFCD79 /* Model */,
 				36C4B891254DC43A0065BB5F /* Controller */,
 			);
-			path = Contacts;
+			path = Contact;
 			sourceTree = "<group>";
 		};
 		36C4B891254DC43A0065BB5F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				36C4B872254D96550065BB5F /* ContactViewController.swift */,
+				36C779A5256D57150055A43A /* ContactTableViewCell.swift */,
+				36259EE5255418E70081B6CA /* ContactCreateViewController.swift */,
+				36259EE2255418D70081B6CA /* ContactViewAndEditViewController.swift */,
+				36DBBA4A256DB05000735717 /* ContactEditViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,22 +280,6 @@
 			isa = PBXGroup;
 			children = (
 				36E408A6251C07E0006BC58D /* MainViewController.swift */,
-			);
-			path = Contoller;
-			sourceTree = "<group>";
-		};
-		36C4B896254DC4860065BB5F /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				36C4B897254DC4A20065BB5F /* Contoller */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		36C4B897254DC4A20065BB5F /* Contoller */ = {
-			isa = PBXGroup;
-			children = (
-				366ED2E0251BB81E007AE2D4 /* CategoryRouteViewController.swift */,
 			);
 			path = Contoller;
 			sourceTree = "<group>";
@@ -253,6 +299,67 @@
 				36C4B8C0254E21C60065BB5F /* flow.gif */,
 			);
 			path = Media;
+			sourceTree = "<group>";
+		};
+		36F1DE9C256D7C8A00BFCD79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				36BB44382571AF9D00A65D2E /* Contact+CoreDataClass.swift */,
+				36BB44392571AF9D00A65D2E /* Contact+CoreDataProperties.swift */,
+				36DBBA45256D90A400735717 /* ContactCoreDataMethods.swift */,
+				36BB443E2571BAA600A65D2E /* RefactoringContactDataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36F1DE9D256D7CB500BFCD79 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				36F1DE9E256D7CC500BFCD79 /* Model */,
+				36F1DE9F256D7CCD00BFCD79 /* Controller */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		36F1DE9E256D7CC500BFCD79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				36259F0A25561FFE0081B6CA /* Category+CoreDataClass.swift */,
+				36259F0B25561FFE0081B6CA /* Category+CoreDataProperties.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36F1DE9F256D7CCD00BFCD79 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				366ED2E0251BB81E007AE2D4 /* CategoryRouteViewController.swift */,
+				36259F0725561CD40081B6CA /* CategoryRouteTableViewCell.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		36F1DEA0256D7CF600BFCD79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36F1DEA1256D7D0800BFCD79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3688B34F251BC59100AB35B4 /* Users+CoreDataClass.swift */,
+				3688B350251BC59100AB35B4 /* Users+CoreDataProperties.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		36F1DEA2256D7D3200BFCD79 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,18 +436,35 @@
 			files = (
 				36E408A7251C07E0006BC58D /* MainViewController.swift in Sources */,
 				36C4B8A9254E0E740065BB5F /* GIfLogic.swift in Sources */,
+				36259EE9255419460081B6CA /* RouteViewController.swift in Sources */,
+				36C779A6256D57150055A43A /* ContactTableViewCell.swift in Sources */,
+				36259F0525541A220081B6CA /* CargoEditViewController.swift in Sources */,
 				36C4B873254D96550065BB5F /* ContactViewController.swift in Sources */,
+				36259F0D25561FFE0081B6CA /* Category+CoreDataProperties.swift in Sources */,
+				36BB443F2571BAA600A65D2E /* RefactoringContactDataModel.swift in Sources */,
 				366ED2E1251BB81E007AE2D4 /* CategoryRouteViewController.swift in Sources */,
+				36259EE3255418D70081B6CA /* ContactViewAndEditViewController.swift in Sources */,
 				366ED2CC251BB139007AE2D4 /* TrafficEditor.xcdatamodeld in Sources */,
 				366ED2C6251BB139007AE2D4 /* StartViewController.swift in Sources */,
 				366ED2C2251BB139007AE2D4 /* AppDelegate.swift in Sources */,
 				3688B352251BC59100AB35B4 /* Users+CoreDataProperties.swift in Sources */,
 				36E408A5251BDD88006BC58D /* ValidateParameters.swift in Sources */,
 				366ED2C4251BB139007AE2D4 /* SceneDelegate.swift in Sources */,
+				36259EE6255418E70081B6CA /* ContactCreateViewController.swift in Sources */,
+				36259F0C25561FFE0081B6CA /* Category+CoreDataClass.swift in Sources */,
 				36C4B870254D96470065BB5F /* LoginAndRegistrationViewController.swift in Sources */,
+				36BB443B2571AF9D00A65D2E /* Contact+CoreDataProperties.swift in Sources */,
 				366ED2E3251BBD21007AE2D4 /* Utilities.swift in Sources */,
+				36259EFE25541A0E0081B6CA /* CargoViewController.swift in Sources */,
 				3688B351251BC59100AB35B4 /* Users+CoreDataClass.swift in Sources */,
 				366ED2E6251BBD4D007AE2D4 /* Constants.swift in Sources */,
+				36BB443A2571AF9D00A65D2E /* Contact+CoreDataClass.swift in Sources */,
+				36DBBA4B256DB05000735717 /* ContactEditViewController.swift in Sources */,
+				36259F0825561CD50081B6CA /* CategoryRouteTableViewCell.swift in Sources */,
+				36259EEC2554197B0081B6CA /* RouteViewViewController.swift in Sources */,
+				36259F0225541A180081B6CA /* CargoViewViewController.swift in Sources */,
+				36259EEF255419860081B6CA /* RouteEditViewController.swift in Sources */,
+				36DBBA46256D90A400735717 /* ContactCoreDataMethods.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

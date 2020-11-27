@@ -31,6 +31,10 @@ class LoginAndRegistrationViewController: UIViewController {
         //Start methods
         setUpElements()
         dissmissKeyboard()
+        
+        //Test
+        usernameTextField.text = "test"
+        passwordTextField.text = "Testtest123*"
     }
     
     //MARK: - Buttons logic
@@ -50,7 +54,7 @@ class LoginAndRegistrationViewController: UIViewController {
             //Login logic
             if fetchRequestUsers(format: "username LIKE %@", argument: username) == true &&
                 fetchRequestUsers(format: "password LIKE %@", argument: password) == true {
-                performSegue(withIdentifier: K.Segues.toMainViewControllet, sender: nil)
+                performSegue(withIdentifier: K.Segues.toMainViewController, sender: nil)
             } else {
                 passwordTextField.text? = ""
                 showInfo("Incorrect username or password.", color: .red)
@@ -92,6 +96,8 @@ class LoginAndRegistrationViewController: UIViewController {
         }
     }
     
+    
+    //Hiding / Showing text
     @IBAction func secureTextEntyTapped(_ sender: UIButton) {
         if secureTextEntyButton.image(for: UIControl.State.normal) == UIImage(systemName: K.Image.eyeSlash) {
             secureTextEntyButton.setImage(UIImage(systemName: K.Image.eye), for: UIControl.State.normal)
@@ -101,9 +107,10 @@ class LoginAndRegistrationViewController: UIViewController {
             passwordTextField.isSecureTextEntry = true
         }
     }
-    
-    //MARK: - CoreData methods
-    
+}
+
+//MARK: - CoreData methods
+extension LoginAndRegistrationViewController {
     func saveDataUsers() {
         do {
             try context.save()
@@ -130,18 +137,10 @@ class LoginAndRegistrationViewController: UIViewController {
             return false
         }
     }
-    
-    //MARK: - Move VC Logic
-    
-    func moveToMainVC() {
-        let mainViewController = storyboard?.instantiateViewController(withIdentifier: K.Storyboard.mainViewContoller) as? MainViewController
-        
-        view.window?.rootViewController = mainViewController
-        view.window?.makeKeyAndVisible()
-    }
-    
-    //MARK: - Validate Text Fields
-    
+}
+
+//MARK: - Validate Text Fields
+extension LoginAndRegistrationViewController {
     func validateFieldsForLogin() -> String? {
         // Check that all fields are filled in
         if usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -171,23 +170,28 @@ class LoginAndRegistrationViewController: UIViewController {
             passwordTextField.text = ""
             return "Please make sure your username is at least 4 characters, not contains a special character and a whitespaces."
         }
-
+        
         return nil
     }
-    
-    //MARK: - Castomization
-    
+}
+
+//MARK: - Castomization
+extension LoginAndRegistrationViewController {
     func setUpElements() {
         // Hide the info label
         infoLabel.alpha = 0
         
         passwordTextField.borderStyle = .none
         
+        
         // Style the elements
         Utilities.styleTextField(usernameTextField)
         Utilities.styleForStack(passwordStack)
         Utilities.styleFilledButton(loginButton)
         Utilities.styleHollowButton(registrationButton)
+        
+        Utilities.parametersPlaceholder(textField: usernameTextField, textPlaceholder: "Username", color: .gray)
+        Utilities.parametersPlaceholder(textField: passwordTextField, textPlaceholder: "Password", color: .gray)
     }
     
     func showInfo(_ text: String, color: UIColor) {
