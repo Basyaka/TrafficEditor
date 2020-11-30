@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class ContactViewController: UIViewController {
     
@@ -50,7 +49,7 @@ extension ContactViewController: UITableViewDelegate, UITableViewDataSource {
         if let data = coreDataMethods.contactArray[indexPath.row].avatarImage {
             cell.avatarImage.image = UIImage(data: data)
         } else {
-            cell.avatarImage.image = UIImage(systemName: "person.fill")
+            cell.avatarImage.image = UIImage(systemName: "person.circle")
         }
         
         return cell
@@ -76,7 +75,7 @@ extension ContactViewController: UITableViewDelegate, UITableViewDataSource {
         if segue.identifier == K.Segues.ContactVC.fromContactToViewAndEditContact {
             let destinationVC = segue.destination as! ContactViewAndEditViewController
             if let indexPath = tableView.indexPathsForSelectedRows?.first {
-                destinationVC.contactViewModel = coreDataMethods.contactArray[indexPath.row]
+                destinationVC.coreDataMethods.contactModel = coreDataMethods.contactArray[indexPath.row]
             }
         }
     }

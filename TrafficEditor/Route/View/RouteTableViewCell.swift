@@ -1,18 +1,17 @@
 //
-//  ContactTableViewCell.swift
+//  RouteViewTableViewCell.swift
 //  TrafficEditor
 //
-//  Created by Vlad Novik on 11/24/20.
+//  Created by Vlad Novik on 11/28/20.
 //  Copyright © 2020 Vlad Novik. All rights reserved.
 //
 
 import UIKit
 
-class ContactTableViewCell: UITableViewCell {
+class RouteTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var avatarImage: UIImageView!
-    @IBOutlet weak var firstName: UILabel!
-    @IBOutlet weak var lastName: UILabel!
+    @IBOutlet weak var pointA: UILabel!
+    @IBOutlet weak var pointB: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

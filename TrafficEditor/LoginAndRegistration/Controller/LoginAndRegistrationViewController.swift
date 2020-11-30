@@ -200,21 +200,3 @@ extension LoginAndRegistrationViewController {
         infoLabel.alpha = 1
     }
 }
-
-//MARK: - Dissmiss keyboard
-extension UIViewController: UITextFieldDelegate {
-    
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    func dissmissKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(self.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-}

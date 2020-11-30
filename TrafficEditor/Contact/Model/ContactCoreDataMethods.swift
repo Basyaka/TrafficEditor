@@ -13,6 +13,7 @@ class ContactCoreDataMethods {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var contactArray = [Contact]()
+    var contactModel: Contact?
     
     func loadContact(with request: NSFetchRequest<Contact> = Contact.fetchRequest()) {
         do {

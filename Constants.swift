@@ -13,11 +13,10 @@ struct K {
     struct Segues {
         
         static let toMainViewController = "toMainVC"
-        static let fromCategoryToRoute = "fromCategoryToRoute"
         
         struct RouteVC {
-            static let fromRouteToViewRoute = "fromRouteToViewRoute"
-            static let fromRouteToEditingRoute = "fromRouteToEditRoute"
+            static let fromRouteToViewAndEditRoute = "fromRouteToViewAndEditRoute"
+            static let fromRouteToEditingRoute = "fromRouteToCreateRoute"
         }
         
         struct ContactVC {
@@ -26,20 +25,16 @@ struct K {
         }
         
         struct CargoVC {
-            static let fromCargoToViewCargo = "fromCargoToViewCargo"
-            static let fromCargoToEditCargo = "fromCargoToEditCargo"
+            static let fromCargoToViewAndEditCargo = "fromCargoToViewAndEditCargo"
+            static let fromCargoToCreateCargo = "fromCargoToCreateCargo"
         }
-        
-        struct CarVC {
-            static let fromCarToViewCar = "fromCarToViewCar"
-            static let stafromCarToEditCar = "fromCarToEditCar"
-        }
-        
     }
     
     struct Cells {
         static let categoryCell = "CategoryCell"
         static let contactCell = "ContactCell"
+        static let routeCell = "RouteCell"
+        static let cargoCell = "CargoCell"
     }
     
     struct Storyboard {

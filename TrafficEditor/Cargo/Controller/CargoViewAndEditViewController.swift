@@ -1,5 +1,5 @@
 //
-//  ContactViewViewController.swift
+//  CargoViewViewController.swift
 //  TrafficEditor
 //
 //  Created by Vlad Novik on 11/5/20.
@@ -8,45 +8,41 @@
 
 import UIKit
 
-class ContactViewAndEditViewController: UIViewController {
+class CargoViewAndEditViewController: UIViewController {
     
-    @IBOutlet weak var contactImage: UIImageView!
-    @IBOutlet weak var changeImageButton: UIButton!
-    @IBOutlet weak var firstNameTextField: UITextField!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var dateOfbirthTextField: UITextField!
-    @IBOutlet weak var experienceTextField: UITextField!
-    @IBOutlet weak var driverIdTextField: UITextField!
-    @IBOutlet weak var carModelTextField: UITextField!
-    @IBOutlet weak var carryingTextField: UITextField!
-    @IBOutlet weak var carNumberTextField: UITextField!
-    @IBOutlet weak var editBarButton: UIBarButtonItem!
+    @IBOutlet weak var cargoImage: UIImageView!
+    @IBOutlet weak var cargoNameTextField: UITextField!
+    @IBOutlet weak var cargoTypeTextField: UITextField!
+    @IBOutlet weak var uploadDateTextField: UITextField!
+    @IBOutlet weak var unloadDateTextField: UITextField!
+    @IBOutlet weak var invoiceNumberTextField: UITextField!
+    @IBOutlet weak var cargoWeightTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var changeImageButton: UIButton!
+    @IBOutlet weak var editBarButton: UIBarButtonItem!
     
-    
-    let coreDataMethods = ContactCoreDataMethods()
-    var refactoringContact = RefactoringContactDataModel()
-    
+    let coreDataMethods = CargoCoreDataMethods()
+    var refactoringCargo = RefactoringCargoDataModel()
     
     private var editBool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Start methods
         setUpElements()
+        dissmissKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //Transfered data
-        firstNameTextField.text = coreDataMethods.contactModel?.firstName
-        lastNameTextField.text = coreDataMethods.contactModel?.lastName
+        cargoNameTextField.text = coreDataMethods.cargoModel?.cargoName
+        cargoTypeTextField.text = coreDataMethods.cargoModel?.cargoType
         
-        if let data = coreDataMethods.contactModel?.avatarImage {
-            contactImage.image = UIImage(data: data)
+        if let data = coreDataMethods.cargoModel?.cargoImage {
+            cargoImage.image = UIImage(data: data)
         } else {
-            contactImage.image = UIImage(systemName: "person.circle")
+            cargoImage.image = UIImage(systemName: "folder.circle")
         }
         
         isEnabledActiveUIElements(false)
@@ -55,8 +51,8 @@ class ContactViewAndEditViewController: UIViewController {
         editBool = true
     }
     
+    
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
-        
         switch editBool {
         case true: //edit
             
@@ -77,23 +73,24 @@ class ContactViewAndEditViewController: UIViewController {
                 isEnabledActiveUIElements(false)
                 
                 //update item
-                coreDataMethods.contactModel?.firstName = firstNameTextField.text
-                coreDataMethods.contactModel?.lastName = lastNameTextField.text
+                coreDataMethods.cargoModel?.cargoName = cargoNameTextField.text
+                coreDataMethods.cargoModel?.cargoType = cargoTypeTextField.text
                 
-                if refactoringContact.imageForSave != nil {
-                    coreDataMethods.contactModel?.avatarImage = refactoringContact.imageForSave?.pngData()
+                if refactoringCargo.imageForSave != nil {
+                    coreDataMethods.cargoModel?.cargoImage = refactoringCargo.imageForSave?.pngData()
                 } else {
                     return
                 }
-            
-                coreDataMethods.saveContact()
+                
+                coreDataMethods.saveCargo()
                 
                 editBool = true
+
             }
         }
     }
     
-    @IBAction func changeButtonTapped(_ sender: UIButton) {
+    @IBAction func changeImageButtonTapped(_ sender: UIButton) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
@@ -121,16 +118,16 @@ class ContactViewAndEditViewController: UIViewController {
 }
 
 //MARK: - UINavigationControllerDelegate, UIImagePickerControllerDelegate
-extension ContactViewAndEditViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension CargoViewAndEditViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            refactoringContact.imageForSave = editedImage
-            contactImage.image = editedImage
+            refactoringCargo.imageForSave = editedImage
+            cargoImage.image = editedImage
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            refactoringContact.imageForSave = originalImage
-            contactImage.image = originalImage
+            refactoringCargo.imageForSave = originalImage
+            cargoImage.image = originalImage
         }
         
         picker.dismiss(animated: true, completion: nil)
@@ -139,15 +136,14 @@ extension ContactViewAndEditViewController: UINavigationControllerDelegate, UIIm
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 //MARK: - Validate Text Fields
-extension ContactViewAndEditViewController {
+extension CargoViewAndEditViewController {
     func validateFields() -> String? {
         // Check that all fields are filled in
-        if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" //||
+        if cargoNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            cargoTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" //||
         //            dateOfbirthTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
         //            experienceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
         //            driverIdTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -162,30 +158,26 @@ extension ContactViewAndEditViewController {
 }
 
 //MARK: - Castomization UI
-extension ContactViewAndEditViewController {
+extension CargoViewAndEditViewController {
     func setUpElements() {
-        contactImage.layer.cornerRadius = 50
+        cargoImage.layer.cornerRadius = 50
         
-        Utilities.styleTextField(firstNameTextField)
-        Utilities.styleTextField(lastNameTextField)
-        Utilities.styleTextField(dateOfbirthTextField)
-        Utilities.styleTextField(experienceTextField)
-        Utilities.styleTextField(driverIdTextField)
-        Utilities.styleTextField(carModelTextField)
-        Utilities.styleTextField(carryingTextField)
-        Utilities.styleTextField(carNumberTextField)
+        Utilities.styleTextField(cargoNameTextField)
+        Utilities.styleTextField(cargoTypeTextField)
+        Utilities.styleTextField(uploadDateTextField)
+        Utilities.styleTextField(unloadDateTextField)
+        Utilities.styleTextField(invoiceNumberTextField)
+        Utilities.styleTextField(cargoWeightTextField)
     }
     
     func isEnabledActiveUIElements(_ bool: Bool) {
         //Text Field
-        firstNameTextField.isEnabled = bool
-        lastNameTextField.isEnabled = bool
-        dateOfbirthTextField.isEnabled = bool
-        experienceTextField.isEnabled = bool
-        driverIdTextField.isEnabled = bool
-        carModelTextField.isEnabled = bool
-        carryingTextField.isEnabled = bool
-        carNumberTextField.isEnabled = bool
+        cargoNameTextField.isEnabled = bool
+        cargoTypeTextField.isEnabled = bool
+        uploadDateTextField.isEnabled = bool
+        unloadDateTextField.isEnabled = bool
+        invoiceNumberTextField.isEnabled = bool
+        cargoWeightTextField.isEnabled = bool
         //Button
         changeImageButton.isEnabled = bool
     }
