@@ -23,16 +23,19 @@ class ContactViewAndEditViewController: UIViewController {
     @IBOutlet weak var editBarButton: UIBarButtonItem!
     @IBOutlet weak var infoLabel: UILabel!
     
+    private let datePicker = UIDatePicker()
     
     let coreDataMethods = ContactCoreDataMethods()
+    let datePickerConvertMethods = DatePickerConvertMethods()
     var refactoringContact = RefactoringContactDataModel()
-    
     
     private var editBool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createDatePickerBirth()
+        createDatePickerExperience()
         //Start methods
         setUpElements()
     }
@@ -42,6 +45,18 @@ class ContactViewAndEditViewController: UIViewController {
         //Transfered data
         firstNameTextField.text = coreDataMethods.contactModel?.firstName
         lastNameTextField.text = coreDataMethods.contactModel?.lastName
+        driverIdTextField.text = coreDataMethods.contactModel?.driverID
+        carModelTextField.text = coreDataMethods.contactModel?.carModel
+        carryingTextField.text = coreDataMethods.contactModel?.carrying
+        carNumberTextField.text = coreDataMethods.contactModel?.carNumber
+        
+        if let date = coreDataMethods.contactModel?.experience {
+            experienceTextField.text = refactoringContact.experienceViewString + datePickerConvertMethods.dateToString(date)
+        }
+        
+        if let date = coreDataMethods.contactModel?.dateOfBirth {
+            dateOfbirthTextField.text = datePickerConvertMethods.dateToString(date)
+        }
         
         if let data = coreDataMethods.contactModel?.avatarImage {
             contactImage.image = UIImage(data: data)
@@ -59,12 +74,11 @@ class ContactViewAndEditViewController: UIViewController {
         
         switch editBool {
         case true: //edit
+            editBool = false
             
             isEnabledActiveUIElements(true)
             view.backgroundColor = .systemGray5
             editBarButton.title = "Done"
-            
-            editBool = false
             
         case false: //done
             let error = validateFields()
@@ -73,22 +87,35 @@ class ContactViewAndEditViewController: UIViewController {
                 view.endEditing(true)
                 showInfo(error!, color: .red)
             } else {
+                editBool = true
+
                 editButtonSetupForUI()
                 isEnabledActiveUIElements(false)
                 
                 //update item
                 coreDataMethods.contactModel?.firstName = firstNameTextField.text
                 coreDataMethods.contactModel?.lastName = lastNameTextField.text
+                coreDataMethods.contactModel?.driverID = driverIdTextField.text
+                coreDataMethods.contactModel?.carModel = carModelTextField.text
+                coreDataMethods.contactModel?.carrying = carryingTextField.text
+                coreDataMethods.contactModel?.carNumber = carNumberTextField.text
+                
+                coreDataMethods.contactModel?.dateOfBirth = datePickerConvertMethods.stringToDate(dateOfbirthTextField.text!)
+                
+                if refactoringContact.experienceSaveString != nil {
+                    coreDataMethods.contactModel?.experience = datePickerConvertMethods.stringToDate(refactoringContact.experienceSaveString!)
+                } else {
+                    return
+                }
                 
                 if refactoringContact.imageForSave != nil {
                     coreDataMethods.contactModel?.avatarImage = refactoringContact.imageForSave?.pngData()
                 } else {
                     return
                 }
-            
+                
                 coreDataMethods.saveContact()
                 
-                editBool = true
             }
         }
     }
@@ -147,17 +174,77 @@ extension ContactViewAndEditViewController {
     func validateFields() -> String? {
         // Check that all fields are filled in
         if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" //||
-        //            dateOfbirthTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            experienceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            driverIdTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            carModelTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            carryingTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            carNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+            lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            dateOfbirthTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            experienceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            driverIdTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            carModelTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            carryingTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            carNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
         {
             return "Please fill in all fields."
         }
         return nil
+    }
+}
+
+//MARK: - Work with DatePicker
+extension ContactViewAndEditViewController {
+    func createDatePickerBirth() {
+        
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //barButton
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedBirth))
+        toolbar.setItems([doneButton], animated: true)
+        
+        //assign toolbar
+        dateOfbirthTextField.inputAccessoryView = toolbar
+        
+        dateOfbirthTextField.inputView = datePicker
+        
+        //date picker mode
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+    }
+    
+    @objc private func donePressedBirth() {
+        // date formatter
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        dateOfbirthTextField.text = formatter.string(from: datePicker.date)
+        view.endEditing(true)
+    }
+    
+    func createDatePickerExperience() {
+        
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //barButton
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedExperience))
+        toolbar.setItems([doneButton], animated: true)
+        
+        //assign toolbar
+        experienceTextField.inputAccessoryView = toolbar
+        
+        experienceTextField.inputView = datePicker
+        
+        //date picker mode
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+    }
+    
+    @objc private func donePressedExperience(_ textField: UITextField) {
+        // date formatter
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        refactoringContact.experienceSaveString = formatter.string(from: datePicker.date)
+        experienceTextField.text = refactoringContact.experienceViewString + refactoringContact.experienceSaveString!
+        view.endEditing(true)
     }
 }
 

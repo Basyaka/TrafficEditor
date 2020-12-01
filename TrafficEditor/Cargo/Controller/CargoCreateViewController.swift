@@ -31,6 +31,11 @@ class CargoCreateViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        let error = validateFields()
+        
+        if error != nil {
+            showInfo(error!, color: .red)
+        } else {
         let newCargo = Cargo(context: self.coreDataMethods.context)
         newCargo.cargoName = cargoNameTextField.text!
         newCargo.cargoType = cargoTypeTextField.text!
@@ -38,7 +43,7 @@ class CargoCreateViewController: UIViewController {
         //TODO
         self.coreDataMethods.cargoArray.append(newCargo)
         self.coreDataMethods.saveCargo()
-
+        }
     }
     
     @IBAction func addImageButtonTapped(_ sender: UIButton) {
@@ -91,6 +96,23 @@ extension CargoCreateViewController: UINavigationControllerDelegate, UIImagePick
     }
 }
 
+//MARK: - Validate Text Fields
+extension CargoCreateViewController {
+    func validateFields() -> String? {
+        // Check that all fields are filled in
+        if cargoNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            cargoTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            uploadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            unloadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            invoiceNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            cargoWeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+        {
+            return "Please fill in all fields."
+        }
+        return nil
+    }
+}
+
 //MARK: - Castomization
 extension CargoCreateViewController {
     func setUpElements() {
@@ -107,5 +129,11 @@ extension CargoCreateViewController {
         Utilities.styleTextField(invoiceNumberTextField)
         Utilities.styleTextField(cargoWeightTextField)
         Utilities.styleFilledButton(saveButton)
+    }
+    
+    func showInfo(_ text: String, color: UIColor) {
+        infoLabel.text = text
+        infoLabel.textColor = color
+        infoLabel.alpha = 1
     }
 }

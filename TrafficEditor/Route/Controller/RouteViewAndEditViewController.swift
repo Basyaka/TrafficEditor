@@ -45,11 +45,11 @@ class RouteViewAndEditViewController: UIViewController {
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         switch editBool {
         case true: //edit
+            editBool = false
+            
             isEnabledActiveUIElements(true)
             view.backgroundColor = .systemGray5
             editButton.title = "Done"
-            
-            editBool = false
             
         case false: //done
             let error = validateFields()
@@ -58,6 +58,8 @@ class RouteViewAndEditViewController: UIViewController {
                 view.endEditing(true)
                 showInfo(error!, color: .red)
             } else {
+                editBool = true
+                
                 editButtonSetupForUI()
                 isEnabledActiveUIElements(false)
                 
@@ -66,8 +68,6 @@ class RouteViewAndEditViewController: UIViewController {
                 coreDataMethods.routeModel?.pointB = pointBTextField.text
                 
                 coreDataMethods.saveRoute()
-                
-                editBool = true
             }
         }
     }

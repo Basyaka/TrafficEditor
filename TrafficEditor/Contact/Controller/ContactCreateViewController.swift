@@ -24,20 +24,26 @@ class ContactCreateViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
     
+    private let datePicker = UIDatePicker()
+    
     let coreDataMethods = ContactCoreDataMethods()
+    let datePickerConvertMethods = DatePickerConvertMethods()
     var refactoringContact = RefactoringContactDataModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createDatePickerBirth()
+        createDatePickerExperience()
         //Start methods
         setUpElements()
-//        addObservers()
+        //        addObservers()
     }
     
-//    deinit {
-//        removeObservers()
-//    }
+    
+    //    deinit {
+    //        removeObservers()
+    //    }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
@@ -67,13 +73,25 @@ class ContactCreateViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        let newContact = Contact(context: self.coreDataMethods.context)
-        newContact.firstName = firstNameTextField.text!
-        newContact.lastName = lastNameTextField.text!
-        newContact.avatarImage = refactoringContact.imageForSave?.pngData()
-        //TODO
-        self.coreDataMethods.contactArray.append(newContact)
-        self.coreDataMethods.saveContact()
+        let error = validateFields()
+        
+        if error != nil {
+            showInfo(error!, color: .red)
+        } else {
+            let newContact = Contact(context: self.coreDataMethods.context)
+            newContact.firstName = firstNameTextField.text!
+            newContact.lastName = lastNameTextField.text!
+            newContact.avatarImage = refactoringContact.imageForSave?.pngData()
+            newContact.dateOfBirth = datePickerConvertMethods.stringToDate(dateOfbirthTextField.text!)
+            newContact.driverID = driverIdTextField.text!
+            newContact.carModel = carModelTextField.text!
+            newContact.carrying = carryingTextField.text!
+            newContact.carNumber = carNumberTextField.text!
+            newContact.experience = datePickerConvertMethods.stringToDate(refactoringContact.experienceSaveString!)
+        
+            self.coreDataMethods.contactArray.append(newContact)
+            self.coreDataMethods.saveContact()
+        }
     }
 }
 
@@ -128,6 +146,85 @@ extension ContactCreateViewController {
     }
 }
 
+//MARK: - Validate Text Fields
+extension ContactCreateViewController {
+    func validateFields() -> String? {
+        // Check that all fields are filled in
+        if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            dateOfbirthTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            experienceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            driverIdTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            carModelTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            carryingTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            carNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+        {
+            return "Please fill in all fields."
+        }
+        return nil
+    }
+}
+
+//MARK: - Work with DatePicker
+extension ContactCreateViewController {
+    func createDatePickerBirth() {
+        
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //barButton
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedBirth))
+        toolbar.setItems([doneButton], animated: true)
+        
+        //assign toolbar
+        dateOfbirthTextField.inputAccessoryView = toolbar
+        
+        dateOfbirthTextField.inputView = datePicker
+        
+        //date picker mode
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+    }
+    
+    @objc private func donePressedBirth(_ textField: UITextField) {
+        // date formatter
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        dateOfbirthTextField.text = formatter.string(from: datePicker.date)
+        view.endEditing(true)
+    }
+    
+    func createDatePickerExperience() {
+        
+        //toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //barButton
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedExperience))
+        toolbar.setItems([doneButton], animated: true)
+        
+        //assign toolbar
+        experienceTextField.inputAccessoryView = toolbar
+        
+        experienceTextField.inputView = datePicker
+        
+        //date picker mode
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+    }
+    
+    @objc private func donePressedExperience(_ textField: UITextField) {
+        // date formatter
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        refactoringContact.experienceSaveString = formatter.string(from: datePicker.date)
+        experienceTextField.text = refactoringContact.experienceViewString + refactoringContact.experienceSaveString!
+        view.endEditing(true)
+    }
+}
+
 //MARK: - Castomization
 extension ContactCreateViewController {
     func setUpElements() {
@@ -146,5 +243,11 @@ extension ContactCreateViewController {
         Utilities.styleTextField(carryingTextField)
         Utilities.styleTextField(carNumberTextField)
         Utilities.styleFilledButton(saveButton)
+    }
+    
+    func showInfo(_ text: String, color: UIColor) {
+        infoLabel.text = text
+        infoLabel.textColor = color
+        infoLabel.alpha = 1
     }
 }

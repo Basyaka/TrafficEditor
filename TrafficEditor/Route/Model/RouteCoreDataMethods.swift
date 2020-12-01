@@ -20,7 +20,7 @@ class RouteCoreDataMethods {
         do {
             routeArray = try context.fetch(request)
         } catch {
-            print("Error reading: \(error)")
+            fatalError()
         }
     }
     

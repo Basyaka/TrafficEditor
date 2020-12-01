@@ -128,7 +128,7 @@ extension LoginAndRegistrationViewController {
             request.predicate = NSPredicate(format: format, argument)
             storage = try context.fetch(request)
         } catch {
-            print(error.localizedDescription)
+            fatalError()
         }
         
         if storage != [] {

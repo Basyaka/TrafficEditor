@@ -19,7 +19,7 @@ class ContactCoreDataMethods {
         do {
             contactArray = try context.fetch(request)
         } catch {
-            print("Error reading: \(error)")
+            fatalError()
         }
     }
     

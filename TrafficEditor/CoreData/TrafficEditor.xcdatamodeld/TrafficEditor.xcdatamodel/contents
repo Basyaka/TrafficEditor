@@ -16,7 +16,7 @@
         <attribute name="carrying" optional="YES" attributeType="String"/>
         <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="driverID" optional="YES" attributeType="String"/>
-        <attribute name="experience" optional="YES" attributeType="String"/>
+        <attribute name="experience" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
     </entity>

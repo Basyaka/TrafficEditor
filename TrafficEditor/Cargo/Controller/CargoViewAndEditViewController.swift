@@ -55,12 +55,11 @@ class CargoViewAndEditViewController: UIViewController {
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         switch editBool {
         case true: //edit
+            editBool = false
             
             isEnabledActiveUIElements(true)
             view.backgroundColor = .systemGray5
             editBarButton.title = "Done"
-            
-            editBool = false
             
         case false: //done
             let error = validateFields()
@@ -69,6 +68,7 @@ class CargoViewAndEditViewController: UIViewController {
                 view.endEditing(true)
                 showInfo(error!, color: .red)
             } else {
+                editBool = true
                 editButtonSetupForUI()
                 isEnabledActiveUIElements(false)
                 
@@ -83,9 +83,6 @@ class CargoViewAndEditViewController: UIViewController {
                 }
                 
                 coreDataMethods.saveCargo()
-                
-                editBool = true
-
             }
         }
     }
@@ -144,12 +141,10 @@ extension CargoViewAndEditViewController {
         // Check that all fields are filled in
         if cargoNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             cargoTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" //||
-        //            dateOfbirthTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            experienceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            driverIdTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            carModelTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            carryingTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-        //            carNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+//            uploadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            unloadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            invoiceNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+//            cargoWeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
         {
             return "Please fill in all fields."
         }
