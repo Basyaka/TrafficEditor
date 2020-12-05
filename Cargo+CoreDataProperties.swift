@@ -20,11 +20,8 @@ extension Cargo {
     @NSManaged public var cargoImage: Data?
     @NSManaged public var cargoName: String?
     @NSManaged public var cargoType: String?
-    @NSManaged public var cargoWeight: Float
+    @NSManaged public var cargoWeight: String?
     @NSManaged public var invoiceNumber: String?
-    @NSManaged public var unloadDate: Date?
-    @NSManaged public var uploadDate: Date?
-
 }
 
 extension Cargo : Identifiable {

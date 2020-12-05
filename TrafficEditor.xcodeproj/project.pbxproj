@@ -33,11 +33,12 @@
 		36BA3E94257456D8004702BD /* Cargo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3E92257456D8004702BD /* Cargo+CoreDataClass.swift */; };
 		36BA3E95257456D8004702BD /* Cargo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3E93257456D8004702BD /* Cargo+CoreDataProperties.swift */; };
 		36BA3E9825745C8D004702BD /* RefactoringCargoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3E9725745C8D004702BD /* RefactoringCargoDataModel.swift */; };
-		36BA3E9C25746B86004702BD /* DissmissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3E9B25746B86004702BD /* DissmissKeyboard.swift */; };
-		36BA3E9F25764341004702BD /* DatePickerForTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3E9E25764341004702BD /* DatePickerForTextField.swift */; };
+		36BA3E9C25746B86004702BD /* DismissKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3E9B25746B86004702BD /* DismissKeyboard.swift */; };
 		36BA3EA6257662C2004702BD /* DatePickerConvertMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3EA5257662C2004702BD /* DatePickerConvertMethods.swift */; };
 		36BA3EAD25766C76004702BD /* Contact+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3EAB25766C76004702BD /* Contact+CoreDataClass.swift */; };
 		36BA3EAE25766C76004702BD /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3EAC25766C76004702BD /* Contact+CoreDataProperties.swift */; };
+		36BA3EB22576E419004702BD /* DatePickerLogicExtensionsForContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3EB12576E419004702BD /* DatePickerLogicExtensionsForContact.swift */; };
+		36BA3EBD25779373004702BD /* DatePickerLogicForRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BA3EBC25779373004702BD /* DatePickerLogicForRoute.swift */; };
 		36BB443F2571BAA600A65D2E /* RefactoringContactDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB443E2571BAA600A65D2E /* RefactoringContactDataModel.swift */; };
 		36BDD03725731C0F009AB400 /* CargoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BDD03625731C0F009AB400 /* CargoTableViewCell.swift */; };
 		36C4B870254D96470065BB5F /* LoginAndRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B86F254D96470065BB5F /* LoginAndRegistrationViewController.swift */; };
@@ -45,6 +46,7 @@
 		36C4B8A9254E0E740065BB5F /* GIfLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4B8A8254E0E740065BB5F /* GIfLogic.swift */; };
 		36C4B8C1254E21C60065BB5F /* flow.gif in Resources */ = {isa = PBXBuildFile; fileRef = 36C4B8C0254E21C60065BB5F /* flow.gif */; };
 		36C779A6256D57150055A43A /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C779A5256D57150055A43A /* ContactTableViewCell.swift */; };
+		36D7AFB2257BCF740054C45A /* RefactoringRouteDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D7AFB1257BCF740054C45A /* RefactoringRouteDataModel.swift */; };
 		36DBBA46256D90A400735717 /* ContactCoreDataMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DBBA45256D90A400735717 /* ContactCoreDataMethods.swift */; };
 		36E408A5251BDD88006BC58D /* ValidateParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E408A4251BDD88006BC58D /* ValidateParameters.swift */; };
 		36E408A7251C07E0006BC58D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E408A6251C07E0006BC58D /* MainViewController.swift */; };
@@ -80,11 +82,12 @@
 		36BA3E92257456D8004702BD /* Cargo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cargo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		36BA3E93257456D8004702BD /* Cargo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cargo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		36BA3E9725745C8D004702BD /* RefactoringCargoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefactoringCargoDataModel.swift; sourceTree = "<group>"; };
-		36BA3E9B25746B86004702BD /* DissmissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DissmissKeyboard.swift; sourceTree = "<group>"; };
-		36BA3E9E25764341004702BD /* DatePickerForTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerForTextField.swift; sourceTree = "<group>"; };
+		36BA3E9B25746B86004702BD /* DismissKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboard.swift; sourceTree = "<group>"; };
 		36BA3EA5257662C2004702BD /* DatePickerConvertMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerConvertMethods.swift; sourceTree = "<group>"; };
 		36BA3EAB25766C76004702BD /* Contact+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		36BA3EAC25766C76004702BD /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		36BA3EB12576E419004702BD /* DatePickerLogicExtensionsForContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerLogicExtensionsForContact.swift; sourceTree = "<group>"; };
+		36BA3EBC25779373004702BD /* DatePickerLogicForRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerLogicForRoute.swift; sourceTree = "<group>"; };
 		36BB443E2571BAA600A65D2E /* RefactoringContactDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefactoringContactDataModel.swift; sourceTree = "<group>"; };
 		36BDD03625731C0F009AB400 /* CargoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CargoTableViewCell.swift; sourceTree = "<group>"; };
 		36C4B86F254D96470065BB5F /* LoginAndRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAndRegistrationViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 		36C4B8A8254E0E740065BB5F /* GIfLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIfLogic.swift; sourceTree = "<group>"; };
 		36C4B8C0254E21C60065BB5F /* flow.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = flow.gif; path = ../../../../../Downloads/flow.gif; sourceTree = "<group>"; };
 		36C779A5256D57150055A43A /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		36D7AFB1257BCF740054C45A /* RefactoringRouteDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefactoringRouteDataModel.swift; sourceTree = "<group>"; };
 		36DBBA45256D90A400735717 /* ContactCoreDataMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCoreDataMethods.swift; sourceTree = "<group>"; };
 		36E408A4251BDD88006BC58D /* ValidateParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateParameters.swift; sourceTree = "<group>"; };
 		36E408A6251C07E0006BC58D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -133,8 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				36259EE8255419460081B6CA /* RouteViewController.swift */,
-				36259EEB2554197B0081B6CA /* RouteViewAndEditViewController.swift */,
 				36259EEE255419860081B6CA /* RouteCreateViewController.swift */,
+				36259EEB2554197B0081B6CA /* RouteViewAndEditViewController.swift */,
+				36BA3EBC25779373004702BD /* DatePickerLogicForRoute.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -266,8 +271,7 @@
 		36BA3E9A25746B43004702BD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				36BA3E9B25746B86004702BD /* DissmissKeyboard.swift */,
-				36BA3E9E25764341004702BD /* DatePickerForTextField.swift */,
+				36BA3E9B25746B86004702BD /* DismissKeyboard.swift */,
 				36BA3EA5257662C2004702BD /* DatePickerConvertMethods.swift */,
 			);
 			path = Model;
@@ -321,6 +325,7 @@
 				36C4B872254D96550065BB5F /* ContactViewController.swift */,
 				36259EE5255418E70081B6CA /* ContactCreateViewController.swift */,
 				36259EE2255418D70081B6CA /* ContactViewAndEditViewController.swift */,
+				36BA3EB12576E419004702BD /* DatePickerLogicExtensionsForContact.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				367BEE2A2572D8AD00539367 /* Route+CoreDataClass.swift */,
 				367BEE2B2572D8AE00539367 /* Route+CoreDataProperties.swift */,
 				366A835E2572A5B2004F4FBC /* RouteCoreDataMethods.swift */,
+				36D7AFB1257BCF740054C45A /* RefactoringRouteDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -471,11 +477,13 @@
 				366A835F2572A5B2004F4FBC /* RouteCoreDataMethods.swift in Sources */,
 				36C779A6256D57150055A43A /* ContactTableViewCell.swift in Sources */,
 				366A835B2572A212004F4FBC /* RouteTableViewCell.swift in Sources */,
+				36D7AFB2257BCF740054C45A /* RefactoringRouteDataModel.swift in Sources */,
 				36259F0525541A220081B6CA /* CargoCreateViewController.swift in Sources */,
 				36C4B873254D96550065BB5F /* ContactViewController.swift in Sources */,
 				36EE44472574562A002E1140 /* CargoCoreDataMethods.swift in Sources */,
 				36BB443F2571BAA600A65D2E /* RefactoringContactDataModel.swift in Sources */,
 				36BA3EA6257662C2004702BD /* DatePickerConvertMethods.swift in Sources */,
+				36BA3EBD25779373004702BD /* DatePickerLogicForRoute.swift in Sources */,
 				36259EE3255418D70081B6CA /* ContactViewAndEditViewController.swift in Sources */,
 				36BA3E94257456D8004702BD /* Cargo+CoreDataClass.swift in Sources */,
 				36BDD03725731C0F009AB400 /* CargoTableViewCell.swift in Sources */,
@@ -483,14 +491,14 @@
 				366ED2C6251BB139007AE2D4 /* StartViewController.swift in Sources */,
 				366ED2C2251BB139007AE2D4 /* AppDelegate.swift in Sources */,
 				3688B352251BC59100AB35B4 /* Users+CoreDataProperties.swift in Sources */,
-				36BA3E9F25764341004702BD /* DatePickerForTextField.swift in Sources */,
 				36E408A5251BDD88006BC58D /* ValidateParameters.swift in Sources */,
 				366ED2C4251BB139007AE2D4 /* SceneDelegate.swift in Sources */,
 				36259EE6255418E70081B6CA /* ContactCreateViewController.swift in Sources */,
 				36BA3EAE25766C76004702BD /* Contact+CoreDataProperties.swift in Sources */,
 				367BEE2C2572D8AE00539367 /* Route+CoreDataClass.swift in Sources */,
 				36C4B870254D96470065BB5F /* LoginAndRegistrationViewController.swift in Sources */,
-				36BA3E9C25746B86004702BD /* DissmissKeyboard.swift in Sources */,
+				36BA3EB22576E419004702BD /* DatePickerLogicExtensionsForContact.swift in Sources */,
+				36BA3E9C25746B86004702BD /* DismissKeyboard.swift in Sources */,
 				366ED2E3251BBD21007AE2D4 /* Utilities.swift in Sources */,
 				36259EFE25541A0E0081B6CA /* CargoViewController.swift in Sources */,
 				3688B351251BC59100AB35B4 /* Users+CoreDataClass.swift in Sources */,

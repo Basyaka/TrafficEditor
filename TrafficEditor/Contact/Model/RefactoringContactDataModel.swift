@@ -10,6 +10,6 @@ import UIKit
 
 class RefactoringContactDataModel {
     var imageForSave: UIImage?
-    var experienceViewString: String = "Experience since: "
+    let experienceViewString: String = "Experience since: "
     var experienceSaveString: String?
 }

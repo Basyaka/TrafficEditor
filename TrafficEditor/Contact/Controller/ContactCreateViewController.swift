@@ -24,7 +24,7 @@ class ContactCreateViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
     
-    private let datePicker = UIDatePicker()
+    let datePicker = UIDatePicker()
     
     let coreDataMethods = ContactCoreDataMethods()
     let datePickerConvertMethods = DatePickerConvertMethods()
@@ -33,10 +33,10 @@ class ContactCreateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createDatePickerBirth()
-        createDatePickerExperience()
         //Start methods
         setUpElements()
+        createDatePickerForDateOfBirthTextField()
+        reateDatePickerForExperienceTextField()
         //        addObservers()
     }
     
@@ -91,6 +91,8 @@ class ContactCreateViewController: UIViewController {
         
             self.coreDataMethods.contactArray.append(newContact)
             self.coreDataMethods.saveContact()
+            
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
 }
@@ -162,66 +164,6 @@ extension ContactCreateViewController {
             return "Please fill in all fields."
         }
         return nil
-    }
-}
-
-//MARK: - Work with DatePicker
-extension ContactCreateViewController {
-    func createDatePickerBirth() {
-        
-        //toolbar
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        //barButton
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedBirth))
-        toolbar.setItems([doneButton], animated: true)
-        
-        //assign toolbar
-        dateOfbirthTextField.inputAccessoryView = toolbar
-        
-        dateOfbirthTextField.inputView = datePicker
-        
-        //date picker mode
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-    }
-    
-    @objc private func donePressedBirth(_ textField: UITextField) {
-        // date formatter
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        dateOfbirthTextField.text = formatter.string(from: datePicker.date)
-        view.endEditing(true)
-    }
-    
-    func createDatePickerExperience() {
-        
-        //toolbar
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        //barButton
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressedExperience))
-        toolbar.setItems([doneButton], animated: true)
-        
-        //assign toolbar
-        experienceTextField.inputAccessoryView = toolbar
-        
-        experienceTextField.inputView = datePicker
-        
-        //date picker mode
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .wheels
-    }
-    
-    @objc private func donePressedExperience(_ textField: UITextField) {
-        // date formatter
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        refactoringContact.experienceSaveString = formatter.string(from: datePicker.date)
-        experienceTextField.text = refactoringContact.experienceViewString + refactoringContact.experienceSaveString!
-        view.endEditing(true)
     }
 }
 

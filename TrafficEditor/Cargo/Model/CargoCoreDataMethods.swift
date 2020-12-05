@@ -31,4 +31,31 @@ class CargoCoreDataMethods {
             print("Error saving \(error)")
         }
     }
+    
+    func searchRequest(formatPredicate: String, sortDescriptorKey: String, searchBar: UISearchBar) {
+        let request: NSFetchRequest<Cargo> = Cargo.fetchRequest()
+        request.predicate = NSPredicate(format: formatPredicate, searchBar.text!)
+        request.sortDescriptors  = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
+        loadCargo(with: request)
+    }
+}
+
+//MARK: - Sort Logic
+extension CargoCoreDataMethods {
+    
+    func sortCargoAZByName() {
+        cargoArray = cargoArray.sorted { (firstElement, secondElement) -> Bool in
+            let firstContact = firstElement.cargoName ?? ""
+            let secondContact = secondElement.cargoName ?? ""
+            return (firstContact.localizedCaseInsensitiveCompare(secondContact) == .orderedAscending)
+        }
+    }
+    
+    func sortCargoZAByName() {
+        cargoArray = cargoArray.sorted { (firstElement, secondElement) -> Bool in
+            let firstContact = firstElement.cargoName ?? ""
+            let secondContact = secondElement.cargoName ?? ""
+            return (secondContact.localizedCaseInsensitiveCompare(firstContact) == .orderedAscending)
+        }
+    }
 }

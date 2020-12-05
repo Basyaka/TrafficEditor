@@ -4,10 +4,8 @@
         <attribute name="cargoImage" optional="YES" attributeType="Binary"/>
         <attribute name="cargoName" optional="YES" attributeType="String"/>
         <attribute name="cargoType" optional="YES" attributeType="String"/>
-        <attribute name="cargoWeight" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="cargoWeight" optional="YES" attributeType="String"/>
         <attribute name="invoiceNumber" optional="YES" attributeType="String"/>
-        <attribute name="unloadDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="uploadDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="avatarImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -21,19 +19,21 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Route" representedClassName="Route" syncable="YES">
-        <attribute name="distanceRoute" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="distanceRoute" optional="YES" attributeType="String"/>
         <attribute name="pointA" optional="YES" attributeType="String"/>
         <attribute name="pointB" optional="YES" attributeType="String"/>
         <attribute name="routeNumber" optional="YES" attributeType="String"/>
+        <attribute name="unloadDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="uploadDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES">
         <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="username" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Cargo" positionX="-9" positionY="-162" width="128" height="148"/>
+        <element name="Cargo" positionX="-9" positionY="-162" width="128" height="118"/>
         <element name="Contact" positionX="109.99609375" positionY="-147.89453125" width="128" height="178"/>
-        <element name="Route" positionX="65.84375" positionY="-304.88671875" width="128" height="103"/>
+        <element name="Route" positionX="65.84375" positionY="-304.88671875" width="128" height="133"/>
         <element name="Users" positionX="-121.9453125" positionY="-51.953125" width="128" height="73"/>
     </elements>
 </model>

@@ -35,4 +35,31 @@ class ContactCoreDataMethods {
             label?.alpha = 1
         }
     }
+    
+    func searchRequest(formatPredicate: String, sortDescriptorKey: String, searchBar: UISearchBar) {
+        let request: NSFetchRequest<Contact> = Contact.fetchRequest()
+        request.predicate = NSPredicate(format: formatPredicate, searchBar.text!)
+        request.sortDescriptors  = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
+        loadContact(with: request)
+    }
+}
+
+//MARK: - Sort Logic
+extension ContactCoreDataMethods {
+    
+    func sortContactAZByLastName() {
+        contactArray = contactArray.sorted { (firstElement, secondElement) -> Bool in
+            let firstContact = firstElement.lastName ?? ""
+            let secondContact = secondElement.lastName ?? ""
+            return (firstContact.localizedCaseInsensitiveCompare(secondContact) == .orderedAscending)
+        }
+    }
+    
+    func sortContactZAByLastName() {
+        contactArray = contactArray.sorted { (firstElement, secondElement) -> Bool in
+            let firstContact = firstElement.lastName ?? ""
+            let secondContact = secondElement.lastName ?? ""
+            return (secondContact.localizedCaseInsensitiveCompare(firstContact) == .orderedAscending)
+        }
+    }
 }

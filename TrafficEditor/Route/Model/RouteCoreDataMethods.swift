@@ -31,4 +31,31 @@ class RouteCoreDataMethods {
             print("Error saving \(error)")
         }
     }
+    
+    func searchRequest(formatPredicate: String, sortDescriptorKey: String, searchBar: UISearchBar) {
+        let request: NSFetchRequest<Route> = Route.fetchRequest()
+        request.predicate = NSPredicate(format: formatPredicate, searchBar.text!)
+        request.sortDescriptors  = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
+        loadRoute(with: request)
+    }
+}
+
+//MARK: - Sort Logic
+extension RouteCoreDataMethods {
+    
+    func sortRouteAZByPointA() {
+        routeArray = routeArray.sorted { (firstElement, secondElement) -> Bool in
+            let firstContact = firstElement.pointA ?? ""
+            let secondContact = secondElement.pointA ?? ""
+            return (firstContact.localizedCaseInsensitiveCompare(secondContact) == .orderedAscending)
+        }
+    }
+    
+    func sortRouteZAByPointA() {
+        routeArray = routeArray.sorted { (firstElement, secondElement) -> Bool in
+            let firstContact = firstElement.pointA ?? ""
+            let secondContact = secondElement.pointA ?? ""
+            return (secondContact.localizedCaseInsensitiveCompare(firstContact) == .orderedAscending)
+        }
+    }
 }

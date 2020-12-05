@@ -16,7 +16,7 @@ class CargoTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        cargoImageView.layer.cornerRadius = 35
+        cargoImageView.layer.cornerRadius = 29
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -1,5 +1,5 @@
 //
-//  DissmissKeyboard.swift
+//  DismissKeyboard.swift
 //  TrafficEditor
 //
 //  Created by Vlad Novik on 11/30/20.
@@ -19,7 +19,7 @@ extension UIViewController: UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func dissmissKeyboard() {
+    func hideKeyboardByTap() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }

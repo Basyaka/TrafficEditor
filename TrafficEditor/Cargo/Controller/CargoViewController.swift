@@ -11,24 +11,77 @@ import UIKit
 class CargoViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewForSearchAndSort: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var searchControl: UISegmentedControl!
     
     let coreDataMethods = CargoCoreDataMethods()
+    
+    private var sortBool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
+        
+        setUpElements()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         coreDataMethods.loadCargo()
+        sortButton.setTitle("A-Z", for: .normal)
+        coreDataMethods.sortCargoAZByName()
         tableView.reloadData()
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: K.Segues.CargoVC.fromCargoToCreateCargo, sender: self)
+    }
+    
+    @IBAction func sortButtonTapped(_ sender: UIButton) {
+        switch sortBool {
+        case true: //ZA
+            sortBool = false
+            sortButton.setTitle("Z-A", for: .normal)
+            coreDataMethods.sortCargoZAByName()
+            tableView.reloadData()
+        case false: //AZ
+            sortBool = true
+            sortButton.setTitle("A-Z", for: .normal)
+            coreDataMethods.sortCargoAZByName()
+            tableView.reloadData()
+        }
+    }
+}
+
+//MARK: - UISearchBarDelegate
+extension CargoViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        if searchControl.selectedSegmentIndex == 0 { //Name
+            coreDataMethods.searchRequest(formatPredicate: "cargoName CONTAINS[cd] %@", sortDescriptorKey: "cargoName", searchBar: searchBar)
+            tableView.reloadData()
+        } else if searchControl.selectedSegmentIndex == 1 { //Type
+            coreDataMethods.searchRequest(formatPredicate: "cargoType CONTAINS[cd] %@", sortDescriptorKey: "cargoType", searchBar: searchBar)
+            tableView.reloadData()
+        } else if searchControl.selectedSegmentIndex == 2 { //Invoice ID
+            coreDataMethods.searchRequest(formatPredicate: "invoiceNumber CONTAINS[cd] %@", sortDescriptorKey: "invoiceNumber", searchBar: searchBar)
+            tableView.reloadData()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            coreDataMethods.loadCargo()
+            tableView.reloadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }
 
@@ -75,5 +128,12 @@ extension CargoViewController: UITableViewDataSource, UITableViewDelegate {
                 destinationVC.coreDataMethods.cargoModel = coreDataMethods.cargoArray[indexPath.row]
             }
         }
+    }
+}
+
+//MARK: - Castomization
+extension CargoViewController {
+    func setUpElements() {
+        sortButton.layer.cornerRadius = 10
     }
 }

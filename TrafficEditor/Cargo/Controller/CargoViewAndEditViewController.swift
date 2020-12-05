@@ -13,8 +13,6 @@ class CargoViewAndEditViewController: UIViewController {
     @IBOutlet weak var cargoImage: UIImageView!
     @IBOutlet weak var cargoNameTextField: UITextField!
     @IBOutlet weak var cargoTypeTextField: UITextField!
-    @IBOutlet weak var uploadDateTextField: UITextField!
-    @IBOutlet weak var unloadDateTextField: UITextField!
     @IBOutlet weak var invoiceNumberTextField: UITextField!
     @IBOutlet weak var cargoWeightTextField: UITextField!
     @IBOutlet weak var infoLabel: UILabel!
@@ -30,21 +28,14 @@ class CargoViewAndEditViewController: UIViewController {
         super.viewDidLoad()
         
         setUpElements()
-        dissmissKeyboard()
+        hideKeyboardByTap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //Transfered data
-        cargoNameTextField.text = coreDataMethods.cargoModel?.cargoName
-        cargoTypeTextField.text = coreDataMethods.cargoModel?.cargoType
         
-        if let data = coreDataMethods.cargoModel?.cargoImage {
-            cargoImage.image = UIImage(data: data)
-        } else {
-            cargoImage.image = UIImage(systemName: "folder.circle")
-        }
-        
+        loadTransmittedCargoInformation()
+  
         isEnabledActiveUIElements(false)
         editButtonSetupForUI()
         
@@ -72,17 +63,9 @@ class CargoViewAndEditViewController: UIViewController {
                 editButtonSetupForUI()
                 isEnabledActiveUIElements(false)
                 
-                //update item
-                coreDataMethods.cargoModel?.cargoName = cargoNameTextField.text
-                coreDataMethods.cargoModel?.cargoType = cargoTypeTextField.text
+                updateCargoInformation()
                 
-                if refactoringCargo.imageForSave != nil {
-                    coreDataMethods.cargoModel?.cargoImage = refactoringCargo.imageForSave?.pngData()
-                } else {
-                    return
-                }
-                
-                coreDataMethods.saveCargo()
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
@@ -135,16 +118,47 @@ extension CargoViewAndEditViewController: UINavigationControllerDelegate, UIImag
     }
 }
 
+//MARK: - Methods For Load And Update Data
+extension CargoViewAndEditViewController {
+    func loadTransmittedCargoInformation() {
+        //Transfered data
+        cargoNameTextField.text = coreDataMethods.cargoModel?.cargoName
+        cargoTypeTextField.text = coreDataMethods.cargoModel?.cargoType
+        invoiceNumberTextField.text = coreDataMethods.cargoModel?.invoiceNumber
+        cargoWeightTextField.text = coreDataMethods.cargoModel?.cargoWeight
+        
+        if let data = coreDataMethods.cargoModel?.cargoImage {
+            cargoImage.image = UIImage(data: data)
+        } else {
+            cargoImage.image = UIImage(systemName: "folder.circle")
+        }
+    }
+    
+    func updateCargoInformation() {
+        //Update item
+        coreDataMethods.cargoModel?.cargoName = cargoNameTextField.text
+        coreDataMethods.cargoModel?.cargoType = cargoTypeTextField.text
+        coreDataMethods.cargoModel?.invoiceNumber = invoiceNumberTextField.text
+        coreDataMethods.cargoModel?.cargoWeight = cargoWeightTextField.text
+        
+        if refactoringCargo.imageForSave != nil {
+            coreDataMethods.cargoModel?.cargoImage = refactoringCargo.imageForSave?.pngData()
+        } else {
+            return
+        }
+        
+        coreDataMethods.saveCargo()
+    }
+}
+
 //MARK: - Validate Text Fields
 extension CargoViewAndEditViewController {
     func validateFields() -> String? {
         // Check that all fields are filled in
         if cargoNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            cargoTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" //||
-//            uploadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            unloadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            invoiceNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-//            cargoWeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+            cargoTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            invoiceNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            cargoWeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
         {
             return "Please fill in all fields."
         }
@@ -159,8 +173,6 @@ extension CargoViewAndEditViewController {
         
         Utilities.styleTextField(cargoNameTextField)
         Utilities.styleTextField(cargoTypeTextField)
-        Utilities.styleTextField(uploadDateTextField)
-        Utilities.styleTextField(unloadDateTextField)
         Utilities.styleTextField(invoiceNumberTextField)
         Utilities.styleTextField(cargoWeightTextField)
     }
@@ -169,8 +181,6 @@ extension CargoViewAndEditViewController {
         //Text Field
         cargoNameTextField.isEnabled = bool
         cargoTypeTextField.isEnabled = bool
-        uploadDateTextField.isEnabled = bool
-        unloadDateTextField.isEnabled = bool
         invoiceNumberTextField.isEnabled = bool
         cargoWeightTextField.isEnabled = bool
         //Button

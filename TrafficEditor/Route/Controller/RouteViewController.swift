@@ -11,20 +11,30 @@ import UIKit
 class RouteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewForSearchAndSort: UIView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var searchControl: UISegmentedControl!
     
     let coreDataMethods = RouteCoreDataMethods()
     
+    private var sortBool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
+        
+        setUpElements()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         coreDataMethods.loadRoute()
+        sortButton.setTitle("A-Z", for: .normal)
+        coreDataMethods.sortRouteAZByPointA()
         tableView.reloadData()
   
     }
@@ -32,7 +42,50 @@ class RouteViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: K.Segues.RouteVC.fromRouteToEditingRoute, sender: self)
     }
+    
+    @IBAction func sortButtonTapped(_ sender: UIButton) {
+        switch sortBool {
+        case true: //ZA
+            sortBool = false
+            sortButton.setTitle("Z-A", for: .normal)
+            coreDataMethods.sortRouteZAByPointA()
+            tableView.reloadData()
+        case false: //AZ
+            sortBool = true
+            sortButton.setTitle("A-Z", for: .normal)
+            coreDataMethods.sortRouteAZByPointA()
+            tableView.reloadData()
+        }
+    }
 }
+
+//MARK: - UISearchBarDelegate
+extension RouteViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        if searchControl.selectedSegmentIndex == 0 { //PointA
+            coreDataMethods.searchRequest(formatPredicate: "pointA CONTAINS[cd] %@", sortDescriptorKey: "pointA", searchBar: searchBar)
+            tableView.reloadData()
+        } else if searchControl.selectedSegmentIndex == 1 { //PointB
+            coreDataMethods.searchRequest(formatPredicate: "pointB CONTAINS[cd] %@", sortDescriptorKey: "pointB", searchBar: searchBar)
+            tableView.reloadData()
+        } else if searchControl.selectedSegmentIndex == 2 { //Route Number
+            coreDataMethods.searchRequest(formatPredicate: "routeNumber CONTAINS[cd] %@", sortDescriptorKey: "routeNumber", searchBar: searchBar)
+            tableView.reloadData()
+        }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            coreDataMethods.loadRoute()
+            tableView.reloadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+}
+
 
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension RouteViewController: UITableViewDataSource, UITableViewDelegate {
@@ -42,8 +95,19 @@ extension RouteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.Cells.routeCell, for: indexPath) as! RouteTableViewCell
-        cell.pointA.text = coreDataMethods.routeArray[indexPath.row].pointA
-        cell.pointB.text = coreDataMethods.routeArray[indexPath.row].pointB
+        
+        if let pointAString = coreDataMethods.routeArray[indexPath.row].pointA {
+            cell.pointA.text = "From: \(pointAString)"
+        }
+        
+        if let pointBString = coreDataMethods.routeArray[indexPath.row].pointB {
+            cell.pointB.text = "To: \(pointBString)"
+        }
+        
+        if let distanceString = coreDataMethods.routeArray[indexPath.row].distanceRoute {
+            cell.distanceLabel.text = "\(distanceString) km"
+        }
+        
         return cell
     }
     
@@ -71,5 +135,11 @@ extension RouteViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
-    
+}
+
+//MARK: - Castomization
+extension RouteViewController {
+    func setUpElements() {
+        sortButton.layer.cornerRadius = 10
+    }
 }

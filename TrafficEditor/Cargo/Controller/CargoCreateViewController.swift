@@ -9,12 +9,10 @@
 import UIKit
 
 class CargoCreateViewController: UIViewController {
-
+    
     @IBOutlet weak var cargoImage: UIImageView!
     @IBOutlet weak var cargoNameTextField: UITextField!
     @IBOutlet weak var cargoTypeTextField: UITextField!
-    @IBOutlet weak var uploadDateTextField: UITextField!
-    @IBOutlet weak var unloadDateTextField: UITextField!
     @IBOutlet weak var invoiceNumberTextField: UITextField!
     @IBOutlet weak var cargoWeightTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -27,7 +25,7 @@ class CargoCreateViewController: UIViewController {
         super.viewDidLoad()
         
         setUpElements()
-        dissmissKeyboard()
+        hideKeyboardByTap()
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
@@ -36,13 +34,15 @@ class CargoCreateViewController: UIViewController {
         if error != nil {
             showInfo(error!, color: .red)
         } else {
-        let newCargo = Cargo(context: self.coreDataMethods.context)
-        newCargo.cargoName = cargoNameTextField.text!
-        newCargo.cargoType = cargoTypeTextField.text!
-        newCargo.cargoImage = refactoringCargo.imageForSave?.pngData()
-        //TODO
-        self.coreDataMethods.cargoArray.append(newCargo)
-        self.coreDataMethods.saveCargo()
+            let newCargo = Cargo(context: self.coreDataMethods.context)
+            newCargo.cargoName = cargoNameTextField.text!
+            newCargo.cargoType = cargoTypeTextField.text!
+            newCargo.invoiceNumber = invoiceNumberTextField.text!
+            newCargo.cargoWeight = cargoWeightTextField.text!
+            newCargo.cargoImage = refactoringCargo.imageForSave?.pngData()
+            self.coreDataMethods.cargoArray.append(newCargo)
+            self.coreDataMethods.saveCargo()
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -72,7 +72,7 @@ class CargoCreateViewController: UIViewController {
         
         present(actionSheet, animated: true, completion: nil)
     }
-
+    
 }
 
 //MARK: - UINavigationControllerDelegate, UIImagePickerControllerDelegate
@@ -102,8 +102,6 @@ extension CargoCreateViewController {
         // Check that all fields are filled in
         if cargoNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             cargoTypeTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            uploadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            unloadDateTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             invoiceNumberTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             cargoWeightTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
         {
@@ -124,8 +122,6 @@ extension CargoCreateViewController {
         //Style the elements
         Utilities.styleTextField(cargoNameTextField)
         Utilities.styleTextField(cargoTypeTextField)
-        Utilities.styleTextField(uploadDateTextField)
-        Utilities.styleTextField(unloadDateTextField)
         Utilities.styleTextField(invoiceNumberTextField)
         Utilities.styleTextField(cargoWeightTextField)
         Utilities.styleFilledButton(saveButton)

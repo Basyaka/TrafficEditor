@@ -12,6 +12,7 @@ class RouteTableViewCell: UITableViewCell {
 
     @IBOutlet weak var pointA: UILabel!
     @IBOutlet weak var pointB: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

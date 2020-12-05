@@ -30,7 +30,7 @@ class LoginAndRegistrationViewController: UIViewController {
         
         //Start methods
         setUpElements()
-        dissmissKeyboard()
+        hideKeyboardByTap()
         
         //Test
         usernameTextField.text = "test"

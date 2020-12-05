@@ -1,15 +1,14 @@
 //
-//  RefactoringCargoDataModel.swift
+//  RefactoringRouteDataModel.swift
 //  TrafficEditor
 //
-//  Created by Vlad Novik on 11/30/20.
+//  Created by Vlad Novik on 12/5/20.
 //  Copyright © 2020 Vlad Novik. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class RefactoringCargoDataModel {
-    var imageForSave: UIImage?
+class RefactoringRouteDataModel {
     let uploadDateViewString = "Upload: "
     let unloadDateViewString = "Unload: "
     var uploadDateSaveString: String?

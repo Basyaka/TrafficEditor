@@ -17,9 +17,11 @@ extension Route {
         return NSFetchRequest<Route>(entityName: "Route")
     }
 
-    @NSManaged public var distanceRoute: Int64
+    @NSManaged public var distanceRoute: String?
     @NSManaged public var pointA: String?
     @NSManaged public var pointB: String?
+    @NSManaged public var uploadDate: Date?
+    @NSManaged public var unloadDate: Date?
     @NSManaged public var routeNumber: String?
 }
 
