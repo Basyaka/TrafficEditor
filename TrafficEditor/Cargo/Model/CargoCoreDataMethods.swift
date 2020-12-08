@@ -11,12 +11,19 @@ import CoreData
 
 class CargoCoreDataMethods {
     
+    static let shared = CargoCoreDataMethods()
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var cargoArray = [Cargo]()
+    var cargoCheckingStorage: [Cargo]?
     var cargoModel: Cargo?
+    var account: Users?
     
     func loadCargo(with request: NSFetchRequest<Cargo> = Cargo.fetchRequest()) {
+        
+        request.predicate = NSPredicate(format: "parentUser.username MATCHES %@", account!.username!)
+        
         do {
             cargoArray = try context.fetch(request)
         } catch {
@@ -37,6 +44,22 @@ class CargoCoreDataMethods {
         request.predicate = NSPredicate(format: formatPredicate, searchBar.text!)
         request.sortDescriptors  = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
         loadCargo(with: request)
+    }
+    
+    func checkingFetchRequest(format: String, argument: String) -> Bool {
+        do {
+            let request = Cargo.fetchRequest() as NSFetchRequest<Cargo>
+            request.predicate = NSPredicate(format: format, argument)
+            cargoCheckingStorage = try context.fetch(request)
+        } catch {
+            fatalError()
+        }
+        
+        if cargoCheckingStorage != [] {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

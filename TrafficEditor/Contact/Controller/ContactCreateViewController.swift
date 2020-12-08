@@ -26,7 +26,7 @@ class ContactCreateViewController: UIViewController {
     
     let datePicker = UIDatePicker()
     
-    let coreDataMethods = ContactCoreDataMethods()
+    let sharedContact = ContactCoreDataMethods.shared
     let datePickerConvertMethods = DatePickerConvertMethods()
     var refactoringContact = RefactoringContactDataModel()
     
@@ -78,21 +78,39 @@ class ContactCreateViewController: UIViewController {
         if error != nil {
             showInfo(error!, color: .red)
         } else {
-            let newContact = Contact(context: self.coreDataMethods.context)
-            newContact.firstName = firstNameTextField.text!
-            newContact.lastName = lastNameTextField.text!
-            newContact.avatarImage = refactoringContact.imageForSave?.pngData()
-            newContact.dateOfBirth = datePickerConvertMethods.stringToDate(dateOfbirthTextField.text!)
-            newContact.driverID = driverIdTextField.text!
-            newContact.carModel = carModelTextField.text!
-            newContact.carrying = carryingTextField.text!
-            newContact.carNumber = carNumberTextField.text!
-            newContact.experience = datePickerConvertMethods.stringToDate(refactoringContact.experienceSaveString!)
-        
-            self.coreDataMethods.contactArray.append(newContact)
-            self.coreDataMethods.saveContact()
             
-            self.navigationController?.popToRootViewController(animated: true)
+            // Create cleaned versions of the data
+            let firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let driverID = driverIdTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let carNumber = carNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let carModel = carModelTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            //Check driverID and CarNumber for uniqueness
+            if sharedContact.checkingFetchRequest(format: "driverID LIKE %@", argument: driverID) == true {
+                view.endEditing(true)
+                showInfo("This driver ID exists. Please сheck if the input is correct.", color: .red)
+            } else if sharedContact.checkingFetchRequest(format: "carNumber LIKE %@", argument: carNumber) == true {
+                view.endEditing(true)
+                showInfo("This car number exists. Please сheck if the input is correct.", color: .red)
+            } else {
+                let newContact = Contact(context: sharedContact.context)
+                newContact.firstName = firstName
+                newContact.lastName = lastName
+                newContact.driverID = driverID
+                newContact.carModel = carModel
+                newContact.carNumber = carNumber
+                newContact.avatarImage = refactoringContact.imageForSave?.pngData()
+                newContact.dateOfBirth = datePickerConvertMethods.stringToDate(dateOfbirthTextField.text!)
+                newContact.carrying = carryingTextField.text!
+                newContact.experience = datePickerConvertMethods.stringToDate(refactoringContact.experienceSaveString!)
+                newContact.parentUser = sharedContact.account
+                
+                sharedContact.contactArray.append(newContact)
+                sharedContact.saveContact()
+                
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
 }

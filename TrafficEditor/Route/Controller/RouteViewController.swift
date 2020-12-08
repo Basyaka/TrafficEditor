@@ -16,7 +16,7 @@ class RouteViewController: UIViewController {
     @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var searchControl: UISegmentedControl!
     
-    let coreDataMethods = RouteCoreDataMethods()
+    let sharedRoute = RouteCoreDataMethods.shared
     
     private var sortBool = true
 
@@ -32,9 +32,9 @@ class RouteViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        coreDataMethods.loadRoute()
+        sharedRoute.loadRoute()
         sortButton.setTitle("A-Z", for: .normal)
-        coreDataMethods.sortRouteAZByPointA()
+        sharedRoute.sortRouteAZByPointA()
         tableView.reloadData()
   
     }
@@ -42,18 +42,18 @@ class RouteViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: K.Segues.RouteVC.fromRouteToEditingRoute, sender: self)
     }
-    
+        
     @IBAction func sortButtonTapped(_ sender: UIButton) {
         switch sortBool {
         case true: //ZA
             sortBool = false
             sortButton.setTitle("Z-A", for: .normal)
-            coreDataMethods.sortRouteZAByPointA()
+            sharedRoute.sortRouteZAByPointA()
             tableView.reloadData()
         case false: //AZ
             sortBool = true
             sortButton.setTitle("A-Z", for: .normal)
-            coreDataMethods.sortRouteAZByPointA()
+            sharedRoute.sortRouteAZByPointA()
             tableView.reloadData()
         }
     }
@@ -64,20 +64,20 @@ extension RouteViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if searchControl.selectedSegmentIndex == 0 { //PointA
-            coreDataMethods.searchRequest(formatPredicate: "pointA CONTAINS[cd] %@", sortDescriptorKey: "pointA", searchBar: searchBar)
+            sharedRoute.searchRequest(formatPredicate: "pointA CONTAINS[cd] %@", sortDescriptorKey: "pointA", searchBar: searchBar)
             tableView.reloadData()
         } else if searchControl.selectedSegmentIndex == 1 { //PointB
-            coreDataMethods.searchRequest(formatPredicate: "pointB CONTAINS[cd] %@", sortDescriptorKey: "pointB", searchBar: searchBar)
+            sharedRoute.searchRequest(formatPredicate: "pointB CONTAINS[cd] %@", sortDescriptorKey: "pointB", searchBar: searchBar)
             tableView.reloadData()
         } else if searchControl.selectedSegmentIndex == 2 { //Route Number
-            coreDataMethods.searchRequest(formatPredicate: "routeNumber CONTAINS[cd] %@", sortDescriptorKey: "routeNumber", searchBar: searchBar)
+            sharedRoute.searchRequest(formatPredicate: "routeNumber CONTAINS[cd] %@", sortDescriptorKey: "routeNumber", searchBar: searchBar)
             tableView.reloadData()
         }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            coreDataMethods.loadRoute()
+            sharedRoute.loadRoute()
             tableView.reloadData()
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
@@ -90,21 +90,21 @@ extension RouteViewController: UISearchBarDelegate {
 //MARK: - UITableViewDelegate, UITableViewDataSource
 extension RouteViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coreDataMethods.routeArray.count
+        return sharedRoute.routeArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.Cells.routeCell, for: indexPath) as! RouteTableViewCell
         
-        if let pointAString = coreDataMethods.routeArray[indexPath.row].pointA {
+        if let pointAString = sharedRoute.routeArray[indexPath.row].pointA {
             cell.pointA.text = "From: \(pointAString)"
         }
         
-        if let pointBString = coreDataMethods.routeArray[indexPath.row].pointB {
+        if let pointBString = sharedRoute.routeArray[indexPath.row].pointB {
             cell.pointB.text = "To: \(pointBString)"
         }
         
-        if let distanceString = coreDataMethods.routeArray[indexPath.row].distanceRoute {
+        if let distanceString = sharedRoute.routeArray[indexPath.row].distanceRoute {
             cell.distanceLabel.text = "\(distanceString) km"
         }
         
@@ -113,9 +113,9 @@ extension RouteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let swipeDelete = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
-            self.coreDataMethods.context.delete(self.coreDataMethods.routeArray[indexPath.row])
-            self.coreDataMethods.routeArray.remove(at: indexPath.row)
-            self.coreDataMethods.saveRoute()
+            self.sharedRoute.context.delete(self.sharedRoute.routeArray[indexPath.row])
+            self.sharedRoute.routeArray.remove(at: indexPath.row)
+            self.sharedRoute.saveRoute()
             self.tableView.reloadData()
         }
         swipeDelete.backgroundColor = .red
@@ -128,12 +128,9 @@ extension RouteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == K.Segues.RouteVC.fromRouteToViewAndEditRoute {
-            let destinationVC = segue.destination as! RouteViewAndEditViewController
             if let indexPath = tableView.indexPathForSelectedRow {
-                destinationVC.coreDataMethods.routeModel = coreDataMethods.routeArray[indexPath.row]
+                sharedRoute.routeModel = sharedRoute.routeArray[indexPath.row]
             }
-        }
     }
 }
 
@@ -143,3 +140,4 @@ extension RouteViewController {
         sortButton.layer.cornerRadius = 10
     }
 }
+

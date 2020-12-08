@@ -7,11 +7,8 @@
 //
 
 import UIKit
-import CoreData
 
 class LoginAndRegistrationViewController: UIViewController {
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     @IBOutlet weak var passwordStack: UIStackView!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -20,6 +17,8 @@ class LoginAndRegistrationViewController: UIViewController {
     @IBOutlet weak var registrationButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var secureTextEntyButton: UIButton!
+    
+    let sharedUsers = UsersCoreDataMethods.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,7 @@ class LoginAndRegistrationViewController: UIViewController {
         usernameTextField.text = "test"
         passwordTextField.text = "Testtest123*"
     }
-    
+        
     //MARK: - Buttons logic
     
     @IBAction func loginTapped(_ sender: UIButton) {
@@ -52,9 +51,16 @@ class LoginAndRegistrationViewController: UIViewController {
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
             //Login logic
-            if fetchRequestUsers(format: "username LIKE %@", argument: username) == true &&
-                fetchRequestUsers(format: "password LIKE %@", argument: password) == true {
+            if sharedUsers.fetchRequestUsers(format: "username LIKE %@", argument: username) == true &&
+                sharedUsers.fetchRequestUsers(format: "password LIKE %@", argument: password) == true {
+                
+                //Transfered loginStorage data to relationships
+                RouteCoreDataMethods.shared.account = sharedUsers.loginStorage?.first
+                ContactCoreDataMethods.shared.account = sharedUsers.loginStorage?.first
+                CargoCoreDataMethods.shared.account = sharedUsers.loginStorage?.first
+                
                 performSegue(withIdentifier: K.Segues.toMainViewController, sender: nil)
+                
             } else {
                 passwordTextField.text? = ""
                 showInfo("Incorrect username or password.", color: .red)
@@ -75,7 +81,7 @@ class LoginAndRegistrationViewController: UIViewController {
             
             //Check user for existence
             
-            if fetchRequestUsers(format: "username LIKE %@", argument: username) == true {
+            if sharedUsers.fetchRequestUsers(format: "username LIKE %@", argument: username) == true {
                 passwordTextField.text? = ""
                 showInfo("This username exists. Please select another username.", color: .red)
                 
@@ -83,7 +89,7 @@ class LoginAndRegistrationViewController: UIViewController {
             } else {
                 
                 //Create new user
-                let newUser = Users(context: context)
+                let newUser = Users(context: sharedUsers.context)
                 newUser.username = username
                 newUser.password = password
                 
@@ -91,11 +97,10 @@ class LoginAndRegistrationViewController: UIViewController {
                 view.endEditing(true)
                 
                 //Save user info
-                saveDataUsers()
+                sharedUsers.saveUsers(label: infoLabel, text: "User created")
             }
         }
     }
-    
     
     //Hiding / Showing text
     @IBAction func secureTextEntyTapped(_ sender: UIButton) {
@@ -105,36 +110,6 @@ class LoginAndRegistrationViewController: UIViewController {
         } else {
             secureTextEntyButton.setImage(UIImage(systemName: K.Image.eyeSlash), for: UIControl.State.normal)
             passwordTextField.isSecureTextEntry = true
-        }
-    }
-}
-
-//MARK: - CoreData methods
-extension LoginAndRegistrationViewController {
-    func saveDataUsers() {
-        do {
-            try context.save()
-            showInfo("User created", color: .green)
-        } catch {
-            showInfo(error.localizedDescription, color: .red)
-        }
-    }
-    
-    func fetchRequestUsers(format: String, argument: String) -> Bool {
-        var storage: [Users]?
-        
-        do {
-            let request = Users.fetchRequest() as NSFetchRequest<Users>
-            request.predicate = NSPredicate(format: format, argument)
-            storage = try context.fetch(request)
-        } catch {
-            fatalError()
-        }
-        
-        if storage != [] {
-            return true
-        } else {
-            return false
         }
     }
 }

@@ -25,7 +25,7 @@ class ContactViewAndEditViewController: UIViewController {
     
     let datePicker = UIDatePicker()
     
-    let coreDataMethods = ContactCoreDataMethods()
+    let sharedContact = ContactCoreDataMethods.shared
     let datePickerConvertMethods = DatePickerConvertMethods()
     var refactoringContact = RefactoringContactDataModel()
     
@@ -73,7 +73,8 @@ class ContactViewAndEditViewController: UIViewController {
                 
                 updateContactInformation()
                 
-                self.navigationController?.popToRootViewController(animated: true)
+              
+               
             }
         }
     }
@@ -109,22 +110,22 @@ class ContactViewAndEditViewController: UIViewController {
 extension ContactViewAndEditViewController {
     func loadTransmittedContactInformation() {
         //Transfered data
-        firstNameTextField.text = coreDataMethods.contactModel?.firstName
-        lastNameTextField.text = coreDataMethods.contactModel?.lastName
-        driverIdTextField.text = coreDataMethods.contactModel?.driverID
-        carModelTextField.text = coreDataMethods.contactModel?.carModel
-        carryingTextField.text = coreDataMethods.contactModel?.carrying
-        carNumberTextField.text = coreDataMethods.contactModel?.carNumber
+        firstNameTextField.text = sharedContact.contactModel?.firstName
+        lastNameTextField.text = sharedContact.contactModel?.lastName
+        driverIdTextField.text = sharedContact.contactModel?.driverID
+        carModelTextField.text = sharedContact.contactModel?.carModel
+        carryingTextField.text = sharedContact.contactModel?.carrying
+        carNumberTextField.text = sharedContact.contactModel?.carNumber
         
-        if let date = coreDataMethods.contactModel?.dateOfBirth {
+        if let date = sharedContact.contactModel?.dateOfBirth {
             dateOfbirthTextField.text = datePickerConvertMethods.dateToString(date)
         }
         
-        if let date = coreDataMethods.contactModel?.experience {
+        if let date = sharedContact.contactModel?.experience {
             experienceTextField.text = refactoringContact.experienceViewString + datePickerConvertMethods.dateToString(date)
         }
         
-        if let data = coreDataMethods.contactModel?.avatarImage {
+        if let data = sharedContact.contactModel?.avatarImage {
             contactImage.image = UIImage(data: data)
         } else {
             contactImage.image = UIImage(systemName: "person.circle")
@@ -132,29 +133,47 @@ extension ContactViewAndEditViewController {
     }
     
     func updateContactInformation() {
-        //Update data
-        coreDataMethods.contactModel?.firstName = firstNameTextField.text
-        coreDataMethods.contactModel?.lastName = lastNameTextField.text
-        coreDataMethods.contactModel?.driverID = driverIdTextField.text
-        coreDataMethods.contactModel?.carModel = carModelTextField.text
-        coreDataMethods.contactModel?.carrying = carryingTextField.text
-        coreDataMethods.contactModel?.carNumber = carNumberTextField.text
+        // Create cleaned versions of the data
+        let firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let driverID = driverIdTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let carNumber = carNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let carModel = carModelTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        coreDataMethods.contactModel?.dateOfBirth = datePickerConvertMethods.stringToDate(dateOfbirthTextField.text!)
-        
-        if refactoringContact.experienceSaveString != nil {
-            coreDataMethods.contactModel?.experience = datePickerConvertMethods.stringToDate(refactoringContact.experienceSaveString!)
+        //Check driverID and CarNumber for uniqueness
+        if driverID != sharedContact.contactModel?.driverID &&
+            sharedContact.checkingFetchRequest(format: "driverID LIKE %@", argument: driverID) == true {
+            view.endEditing(true)
+            showInfo("This driver ID exists. Please сheck if the input is correct.", color: .red)
+
+        } else if carNumber != sharedContact.contactModel?.carNumber &&
+                    sharedContact.checkingFetchRequest(format: "carNumber LIKE %@", argument: carNumber) == true {
+            view.endEditing(true)
+            showInfo("This car number exists. Please сheck if the input is correct.", color: .red)
+
         } else {
-            return
+            
+            //Update data
+            sharedContact.contactModel?.firstName = firstName
+            sharedContact.contactModel?.lastName = lastName
+            sharedContact.contactModel?.driverID = driverID
+            sharedContact.contactModel?.carModel = carModel
+            sharedContact.contactModel?.carNumber = carNumber
+            sharedContact.contactModel?.carrying = carryingTextField.text
+            
+            sharedContact.contactModel?.dateOfBirth = datePickerConvertMethods.stringToDate(dateOfbirthTextField.text!)
+            
+            if refactoringContact.experienceSaveString != nil {
+                sharedContact.contactModel?.experience = datePickerConvertMethods.stringToDate(refactoringContact.experienceSaveString!)
+            }
+            
+            if refactoringContact.imageForSave != nil {
+                sharedContact.contactModel?.avatarImage = refactoringContact.imageForSave?.pngData()
+            }
+            
+            sharedContact.saveContact()
+            
         }
-        
-        if refactoringContact.imageForSave != nil {
-            coreDataMethods.contactModel?.avatarImage = refactoringContact.imageForSave?.pngData()
-        } else {
-            return
-        }
-        
-        coreDataMethods.saveContact()
     }
 }
 

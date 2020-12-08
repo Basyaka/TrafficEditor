@@ -19,7 +19,7 @@ class CargoViewAndEditViewController: UIViewController {
     @IBOutlet weak var changeImageButton: UIButton!
     @IBOutlet weak var editBarButton: UIBarButtonItem!
     
-    let coreDataMethods = CargoCoreDataMethods()
+    let sharedCargo = CargoCoreDataMethods.shared
     var refactoringCargo = RefactoringCargoDataModel()
     
     private var editBool = true
@@ -35,7 +35,7 @@ class CargoViewAndEditViewController: UIViewController {
         super.viewWillAppear(true)
         
         loadTransmittedCargoInformation()
-  
+        
         isEnabledActiveUIElements(false)
         editButtonSetupForUI()
         
@@ -122,12 +122,12 @@ extension CargoViewAndEditViewController: UINavigationControllerDelegate, UIImag
 extension CargoViewAndEditViewController {
     func loadTransmittedCargoInformation() {
         //Transfered data
-        cargoNameTextField.text = coreDataMethods.cargoModel?.cargoName
-        cargoTypeTextField.text = coreDataMethods.cargoModel?.cargoType
-        invoiceNumberTextField.text = coreDataMethods.cargoModel?.invoiceNumber
-        cargoWeightTextField.text = coreDataMethods.cargoModel?.cargoWeight
+        cargoNameTextField.text = sharedCargo.cargoModel?.cargoName
+        cargoTypeTextField.text = sharedCargo.cargoModel?.cargoType
+        invoiceNumberTextField.text = sharedCargo.cargoModel?.invoiceNumber
+        cargoWeightTextField.text = sharedCargo.cargoModel?.cargoWeight
         
-        if let data = coreDataMethods.cargoModel?.cargoImage {
+        if let data = sharedCargo.cargoModel?.cargoImage {
             cargoImage.image = UIImage(data: data)
         } else {
             cargoImage.image = UIImage(systemName: "folder.circle")
@@ -135,19 +135,30 @@ extension CargoViewAndEditViewController {
     }
     
     func updateCargoInformation() {
-        //Update item
-        coreDataMethods.cargoModel?.cargoName = cargoNameTextField.text
-        coreDataMethods.cargoModel?.cargoType = cargoTypeTextField.text
-        coreDataMethods.cargoModel?.invoiceNumber = invoiceNumberTextField.text
-        coreDataMethods.cargoModel?.cargoWeight = cargoWeightTextField.text
+        // Create cleaned versions of the data
+        let cargoName = cargoNameTextField.text!
+        let cargoType = cargoTypeTextField.text!
+        let invoiceNumber = invoiceNumberTextField.text!
         
-        if refactoringCargo.imageForSave != nil {
-            coreDataMethods.cargoModel?.cargoImage = refactoringCargo.imageForSave?.pngData()
+        //Check routeNumber for uniqueness
+        if invoiceNumber != sharedCargo.cargoModel?.invoiceNumber &&
+            sharedCargo.checkingFetchRequest(format: "invoiceNumber LIKE %@", argument: invoiceNumber) == true {
+            view.endEditing(true)
+            showInfo("This invoice number exists. Please сheck if the input is correct.", color: .red)
         } else {
-            return
+            
+            //Update item
+            sharedCargo.cargoModel?.cargoName = cargoName
+            sharedCargo.cargoModel?.cargoType = cargoType
+            sharedCargo.cargoModel?.invoiceNumber = invoiceNumber
+            sharedCargo.cargoModel?.cargoWeight = cargoWeightTextField.text
+            
+            if refactoringCargo.imageForSave != nil {
+                sharedCargo.cargoModel?.cargoImage = refactoringCargo.imageForSave?.pngData()
+            }
+            
+            sharedCargo.saveCargo()
         }
-        
-        coreDataMethods.saveCargo()
     }
 }
 

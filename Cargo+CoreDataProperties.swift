@@ -2,7 +2,7 @@
 //  Cargo+CoreDataProperties.swift
 //  TrafficEditor
 //
-//  Created by Vlad Novik on 11/30/20.
+//  Created by Vlad Novik on 12/8/20.
 //  Copyright © 2020 Vlad Novik. All rights reserved.
 //
 //
@@ -22,6 +22,8 @@ extension Cargo {
     @NSManaged public var cargoType: String?
     @NSManaged public var cargoWeight: String?
     @NSManaged public var invoiceNumber: String?
+    @NSManaged public var parentUser: Users?
+
 }
 
 extension Cargo : Identifiable {

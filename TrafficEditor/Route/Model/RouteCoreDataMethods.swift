@@ -11,12 +11,20 @@ import CoreData
 
 class RouteCoreDataMethods {
     
+    static let shared = RouteCoreDataMethods()
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var routeArray = [Route]()
+    var routeCheckingStorage: [Route]?
     var routeModel: Route?
+    var account: Users?
     
     func loadRoute(with request: NSFetchRequest<Route> = Route.fetchRequest()) {
+        
+        request.predicate = NSPredicate(format: "parentUser.username MATCHES %@", account!.username!)
+        
+        
         do {
             routeArray = try context.fetch(request)
         } catch {
@@ -37,6 +45,22 @@ class RouteCoreDataMethods {
         request.predicate = NSPredicate(format: formatPredicate, searchBar.text!)
         request.sortDescriptors  = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
         loadRoute(with: request)
+    }
+    
+    func checkingFetchRequest(format: String, argument: String) -> Bool {
+        do {
+            let request = Route.fetchRequest() as NSFetchRequest<Route>
+            request.predicate = NSPredicate(format: format, argument)
+            routeCheckingStorage = try context.fetch(request)
+        } catch {
+            fatalError()
+        }
+        
+        if routeCheckingStorage != [] {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

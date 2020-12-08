@@ -17,7 +17,7 @@ class ContactViewController: UIViewController {
     @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var searchControl: UISegmentedControl!
     
-    let coreDataMethods = ContactCoreDataMethods()
+    let sharedContact = ContactCoreDataMethods.shared
     
     private var sortBool = true
     // we set a variable to hold the contentOffSet before scroll view scrolls
@@ -37,9 +37,9 @@ class ContactViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        coreDataMethods.loadContact()
+        sharedContact.loadContact()
         sortButton.setTitle("A-Z", for: .normal)
-        coreDataMethods.sortContactAZByLastName()
+        sharedContact.sortContactAZByLastName()
         tableView.reloadData()
     }
     
@@ -52,12 +52,12 @@ class ContactViewController: UIViewController {
         case true: //ZA
             sortBool = false
             sortButton.setTitle("Z-A", for: .normal)
-            coreDataMethods.sortContactZAByLastName()
+            sharedContact.sortContactZAByLastName()
             tableView.reloadData()
         case false: //AZ
             sortBool = true
             sortButton.setTitle("A-Z", for: .normal)
-            coreDataMethods.sortContactAZByLastName()
+            sharedContact.sortContactAZByLastName()
             tableView.reloadData()
         }
     }
@@ -68,20 +68,20 @@ extension ContactViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if searchControl.selectedSegmentIndex == 0 { //last name
-            coreDataMethods.searchRequest(formatPredicate: "lastName CONTAINS[cd] %@", sortDescriptorKey: "lastName", searchBar: searchBar)
+            sharedContact.searchRequest(formatPredicate: "lastName CONTAINS[cd] %@", sortDescriptorKey: "lastName", searchBar: searchBar)
             tableView.reloadData()
         } else if searchControl.selectedSegmentIndex == 1 { //driver id
-            coreDataMethods.searchRequest(formatPredicate: "driverID CONTAINS[cd] %@", sortDescriptorKey: "driverID", searchBar: searchBar)
+            sharedContact.searchRequest(formatPredicate: "driverID CONTAINS[cd] %@", sortDescriptorKey: "driverID", searchBar: searchBar)
             tableView.reloadData()
         } else if searchControl.selectedSegmentIndex == 2 { //car number
-            coreDataMethods.searchRequest(formatPredicate: "carNumber CONTAINS[cd] %@", sortDescriptorKey: "carNumber", searchBar: searchBar)
+            sharedContact.searchRequest(formatPredicate: "carNumber CONTAINS[cd] %@", sortDescriptorKey: "carNumber", searchBar: searchBar)
             tableView.reloadData()
         }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            coreDataMethods.loadContact()
+            sharedContact.loadContact()
             tableView.reloadData()
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
@@ -94,16 +94,16 @@ extension ContactViewController: UISearchBarDelegate {
 extension ContactViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coreDataMethods.contactArray.count
+        return sharedContact.contactArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.Cells.contactCell, for: indexPath) as! ContactTableViewCell
         
-        cell.firstName.text = coreDataMethods.contactArray[indexPath.row].firstName
-        cell.lastName.text = coreDataMethods.contactArray[indexPath.row].lastName
+        cell.firstName.text = sharedContact.contactArray[indexPath.row].firstName
+        cell.lastName.text = sharedContact.contactArray[indexPath.row].lastName
         
-        if let data = coreDataMethods.contactArray[indexPath.row].avatarImage {
+        if let data = sharedContact.contactArray[indexPath.row].avatarImage {
             cell.avatarImage.image = UIImage(data: data)
         } else {
             cell.avatarImage.image = UIImage(systemName: "person.circle")
@@ -114,9 +114,9 @@ extension ContactViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let swipeDelete = UIContextualAction(style: .normal, title: "Delete") { (action, view, success) in
-            self.coreDataMethods.context.delete(self.coreDataMethods.contactArray[indexPath.row])
-            self.coreDataMethods.contactArray.remove(at: indexPath.row)
-            self.coreDataMethods.saveContact()
+            self.sharedContact.context.delete(ContactCoreDataMethods.shared.contactArray[indexPath.row])
+            self.sharedContact.contactArray.remove(at: indexPath.row)
+            self.sharedContact.saveContact()
             tableView.reloadData()
         }
         swipeDelete.backgroundColor = .red
@@ -129,11 +129,8 @@ extension ContactViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == K.Segues.ContactVC.fromContactToViewAndEditContact {
-            let destinationVC = segue.destination as! ContactViewAndEditViewController
-            if let indexPath = tableView.indexPathsForSelectedRows?.first {
-                destinationVC.coreDataMethods.contactModel = coreDataMethods.contactArray[indexPath.row]
-            }
+        if let indexPath = tableView.indexPathsForSelectedRows?.first {
+            sharedContact.contactModel = ContactCoreDataMethods.shared.contactArray[indexPath.row]
         }
     }
     
@@ -143,21 +140,21 @@ extension ContactViewController: UITableViewDelegate, UITableViewDataSource {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.lastContentOffset = scrollView.contentOffset.y
     }
-
+    
     // while scrolling this delegate is being called so you may now check which direction your scrollView is being scrolled to
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if self.lastContentOffset < scrollView.contentOffset.y {
             // did move up
             viewForSearchAndSort.isHidden = false
-//            tableView.topAnchor.constraint(equalTo: viewForSearchAndSort.topAnchor).isActive = true
+            //            tableView.topAnchor.constraint(equalTo: viewForSearchAndSort.topAnchor).isActive = true
         } else if self.lastContentOffset > scrollView.contentOffset.y {
             // did move down
             viewForSearchAndSort.isHidden = true
-//            tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        } else {
+            //            tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            //        } else {
             // didn't move
-//            viewForSearchAndSort.isHidden = false
-//            tableView.topAnchor.constraint(equalTo: viewForSearchAndSort.topAnchor).isActive = true
+            //            viewForSearchAndSort.isHidden = false
+            //            tableView.topAnchor.constraint(equalTo: viewForSearchAndSort.topAnchor).isActive = true
         }
     }
 }

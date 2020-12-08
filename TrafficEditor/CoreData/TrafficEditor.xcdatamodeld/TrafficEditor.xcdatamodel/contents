@@ -6,6 +6,7 @@
         <attribute name="cargoType" optional="YES" attributeType="String"/>
         <attribute name="cargoWeight" optional="YES" attributeType="String"/>
         <attribute name="invoiceNumber" optional="YES" attributeType="String"/>
+        <relationship name="parentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="cargoes" inverseEntity="Users"/>
     </entity>
     <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="avatarImage" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -17,6 +18,7 @@
         <attribute name="experience" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstName" optional="YES" attributeType="String"/>
         <attribute name="lastName" optional="YES" attributeType="String"/>
+        <relationship name="parentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="contacts" inverseEntity="Users"/>
     </entity>
     <entity name="Route" representedClassName="Route" syncable="YES">
         <attribute name="distanceRoute" optional="YES" attributeType="String"/>
@@ -25,15 +27,19 @@
         <attribute name="routeNumber" optional="YES" attributeType="String"/>
         <attribute name="unloadDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="uploadDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="parentUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="routes" inverseEntity="Users"/>
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES">
         <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="username" optional="YES" attributeType="String"/>
+        <relationship name="cargoes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cargo" inverseName="parentUser" inverseEntity="Cargo"/>
+        <relationship name="contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="parentUser" inverseEntity="Contact"/>
+        <relationship name="routes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Route" inverseName="parentUser" inverseEntity="Route"/>
     </entity>
     <elements>
-        <element name="Cargo" positionX="-9" positionY="-162" width="128" height="118"/>
-        <element name="Contact" positionX="109.99609375" positionY="-147.89453125" width="128" height="178"/>
-        <element name="Route" positionX="65.84375" positionY="-304.88671875" width="128" height="133"/>
-        <element name="Users" positionX="-121.9453125" positionY="-51.953125" width="128" height="73"/>
+        <element name="Cargo" positionX="-122.60546875" positionY="-305.83984375" width="128" height="133"/>
+        <element name="Contact" positionX="254.0859375" positionY="-614.28125" width="128" height="193"/>
+        <element name="Route" positionX="416.58984375" positionY="-320.88671875" width="128" height="148"/>
+        <element name="Users" positionX="-114.8984375" positionY="-508.953125" width="128" height="118"/>
     </elements>
 </model>

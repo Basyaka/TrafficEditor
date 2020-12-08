@@ -18,7 +18,7 @@ class CargoCreateViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var infoLabel: UILabel!
     
-    let coreDataMethods = CargoCoreDataMethods()
+    let sharedCargo = CargoCoreDataMethods.shared
     var refactoringCargo = RefactoringCargoDataModel()
     
     override func viewDidLoad() {
@@ -34,20 +34,34 @@ class CargoCreateViewController: UIViewController {
         if error != nil {
             showInfo(error!, color: .red)
         } else {
-            let newCargo = Cargo(context: self.coreDataMethods.context)
-            newCargo.cargoName = cargoNameTextField.text!
-            newCargo.cargoType = cargoTypeTextField.text!
-            newCargo.invoiceNumber = invoiceNumberTextField.text!
-            newCargo.cargoWeight = cargoWeightTextField.text!
-            newCargo.cargoImage = refactoringCargo.imageForSave?.pngData()
-            self.coreDataMethods.cargoArray.append(newCargo)
-            self.coreDataMethods.saveCargo()
-            self.navigationController?.popToRootViewController(animated: true)
+            
+            // Create cleaned versions of the data
+            let cargoName = cargoNameTextField.text!
+            let cargoType = cargoTypeTextField.text!
+            let invoiceNumber = invoiceNumberTextField.text!
+            
+            //Check routeNumber for uniqueness
+            if sharedCargo.checkingFetchRequest(format: "invoiceNumber LIKE %@", argument: invoiceNumber) == true {
+                view.endEditing(true)
+                showInfo("This invoice number exists. Please сheck if the input is correct.", color: .red)
+            } else {
+                
+                let newCargo = Cargo(context: self.sharedCargo.context)
+                newCargo.cargoName = cargoName
+                newCargo.cargoType = cargoType
+                newCargo.invoiceNumber = invoiceNumber
+                newCargo.cargoWeight = cargoWeightTextField.text!
+                newCargo.cargoImage = refactoringCargo.imageForSave?.pngData()
+                newCargo.parentUser = sharedCargo.account
+                
+                self.sharedCargo.cargoArray.append(newCargo)
+                self.sharedCargo.saveCargo()
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
     
     @IBAction func addImageButtonTapped(_ sender: UIButton) {
-        
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true

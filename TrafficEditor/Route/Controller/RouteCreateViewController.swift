@@ -21,7 +21,7 @@ class RouteCreateViewController: UIViewController {
     
     let datePicker = UIDatePicker()
     
-    let coreDataMethods = RouteCoreDataMethods()
+    let sharedRoute = RouteCoreDataMethods.shared
     let datePickerConvertMethods = DatePickerConvertMethods()
     var refactoringRoute = RefactoringRouteDataModel()
     
@@ -40,18 +40,33 @@ class RouteCreateViewController: UIViewController {
         if error != nil {
             showInfo(error!, color: .red)
         } else {
-            let newRoute = Route(context: coreDataMethods.context)
-            newRoute.pointA = pointATextField.text!
-            newRoute.pointB = pointBTextField.text!
-            newRoute.uploadDate = datePickerConvertMethods.stringToDate(refactoringRoute.uploadDateSaveString!)
-            newRoute.unloadDate = datePickerConvertMethods.stringToDate(refactoringRoute.unloadDateSaveString!)
-            newRoute.distanceRoute = distanceTextField.text!
-            newRoute.routeNumber = routeNumberTextField.text!
-            self.coreDataMethods.routeArray.append(newRoute)
-            self.coreDataMethods.saveRoute()
-            self.navigationController?.popToRootViewController(animated: true)
+            
+            // Create cleaned versions of the data
+            let pointA = pointATextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let pointB = pointBTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let routeNumber = routeNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            //Check routeNumber for uniqueness
+            if sharedRoute.checkingFetchRequest(format: "routeNumber LIKE %@", argument: routeNumber) == true {
+                view.endEditing(true)
+                showInfo("This route number exists. Please сheck if the input is correct.", color: .red)
+            } else {
+                
+                let newRoute = Route(context: sharedRoute.context)
+                newRoute.pointA = pointA
+                newRoute.pointB = pointB
+                newRoute.uploadDate = datePickerConvertMethods.stringToDate(refactoringRoute.uploadDateSaveString!)
+                newRoute.unloadDate = datePickerConvertMethods.stringToDate(refactoringRoute.unloadDateSaveString!)
+                newRoute.distanceRoute = distanceTextField.text!
+                newRoute.routeNumber = routeNumber
+                newRoute.parentUser = sharedRoute.account
+                
+                sharedRoute.routeArray.append(newRoute)
+                sharedRoute.saveRoute()
+                
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
-        
     }
 }
 

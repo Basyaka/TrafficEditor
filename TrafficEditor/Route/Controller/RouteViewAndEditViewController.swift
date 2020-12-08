@@ -23,7 +23,7 @@ class RouteViewAndEditViewController: UIViewController {
     
     let datePicker = UIDatePicker()
     
-    let coreDataMethods = RouteCoreDataMethods()
+    let sharedRoute = RouteCoreDataMethods.shared
     let datePickerConvertMethods = DatePickerConvertMethods()
     var refactoringRoute = RefactoringRouteDataModel()
     
@@ -89,43 +89,53 @@ class RouteViewAndEditViewController: UIViewController {
 extension RouteViewAndEditViewController {
     func loadTransmittedRouteInformation() {
         //Transfered data
-        pointATextField.text = coreDataMethods.routeModel?.pointA
-        pointBTextField.text = coreDataMethods.routeModel?.pointB
-        routeNumberTextField.text = coreDataMethods.routeModel?.routeNumber
+        pointATextField.text = sharedRoute.routeModel?.pointA
+        pointBTextField.text = sharedRoute.routeModel?.pointB
+        routeNumberTextField.text = sharedRoute.routeModel?.routeNumber
         
-        if let date = coreDataMethods.routeModel?.uploadDate {
+        if let date = RouteCoreDataMethods.shared.routeModel?.uploadDate {
             uploadDateTextField.text = refactoringRoute.uploadDateViewString + datePickerConvertMethods.dateToString(date)
         }
         
-        if let date = coreDataMethods.routeModel?.unloadDate {
+        if let date = RouteCoreDataMethods.shared.routeModel?.unloadDate {
             unloadDateTextField.text = refactoringRoute.unloadDateViewString + datePickerConvertMethods.dateToString(date)
         }
         
-        if let distanceString = coreDataMethods.routeModel?.distanceRoute {
+        if let distanceString = sharedRoute.routeModel?.distanceRoute {
             distanceTextField.text = distanceString
         }
     }
     
     func updateRouteInformation() {
-        //update item
-        coreDataMethods.routeModel?.pointA = pointATextField.text
-        coreDataMethods.routeModel?.pointB = pointBTextField.text
-        coreDataMethods.routeModel?.distanceRoute = distanceTextField.text
-        coreDataMethods.routeModel?.routeNumber = routeNumberTextField.text
         
-        if refactoringRoute.uploadDateSaveString != nil {
-            coreDataMethods.routeModel?.uploadDate = datePickerConvertMethods.stringToDate(refactoringRoute.uploadDateSaveString!)
+        // Create cleaned versions of the data
+        let pointA = pointATextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let pointB = pointBTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let routeNumber = routeNumberTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        //Check routeNumber for uniqueness
+        if routeNumber != sharedRoute.routeModel?.routeNumber &&
+            sharedRoute.checkingFetchRequest(format: "routeNumber LIKE %@", argument: routeNumber) == true {
+            view.endEditing(true)
+            showInfo("This route number exists. Please сheck if the input is correct.", color: .red)
         } else {
-            return
+            
+            //update item
+            sharedRoute.routeModel?.pointA = pointA
+            sharedRoute.routeModel?.pointB = pointB
+            sharedRoute.routeModel?.distanceRoute = distanceTextField.text
+            sharedRoute.routeModel?.routeNumber = routeNumber
+            
+            if refactoringRoute.uploadDateSaveString != nil {
+                sharedRoute.routeModel?.uploadDate = datePickerConvertMethods.stringToDate(refactoringRoute.uploadDateSaveString!)
+            }
+            
+            if refactoringRoute.unloadDateSaveString != nil {
+                sharedRoute.routeModel?.unloadDate = datePickerConvertMethods.stringToDate(refactoringRoute.unloadDateSaveString!)
+            }
+            
+            sharedRoute.saveRoute()
         }
-        
-        if refactoringRoute.unloadDateSaveString != nil {
-            coreDataMethods.routeModel?.unloadDate = datePickerConvertMethods.stringToDate(refactoringRoute.unloadDateSaveString!)
-        } else {
-            return
-        }
-        
-        coreDataMethods.saveRoute()
     }
 }
 
