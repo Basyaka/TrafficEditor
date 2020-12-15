@@ -10,6 +10,7 @@ import UIKit
 
 class CargoViewAndEditViewController: UIViewController {
     
+
     @IBOutlet weak var cargoImage: UIImageView!
     @IBOutlet weak var cargoNameTextField: UITextField!
     @IBOutlet weak var cargoTypeTextField: UITextField!
@@ -50,6 +51,7 @@ class CargoViewAndEditViewController: UIViewController {
             
             isEnabledActiveUIElements(true)
             view.backgroundColor = .systemGray5
+            infoLabel.alpha = 0
             editBarButton.title = "Done"
             
         case false: //done
@@ -64,8 +66,6 @@ class CargoViewAndEditViewController: UIViewController {
                 isEnabledActiveUIElements(false)
                 
                 updateCargoInformation()
-                
-                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
@@ -158,6 +158,8 @@ extension CargoViewAndEditViewController {
             }
             
             sharedCargo.saveCargo()
+            view.backgroundColor = .systemBackground
+            showInfo("Successful data update.", color: .green)
         }
     }
 }

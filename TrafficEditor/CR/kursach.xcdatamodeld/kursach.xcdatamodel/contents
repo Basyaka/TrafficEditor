@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Car" representedClassName="Car" syncable="YES" codeGenerationType="class">
+        <attribute name="car_model" optional="YES" attributeType="String"/>
+        <attribute name="car_number" optional="YES" attributeType="String"/>
+        <attribute name="carrying_kg" optional="YES" attributeType="String"/>
+        <relationship name="driver" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Driver" inverseName="car" inverseEntity="Driver"/>
+    </entity>
+    <entity name="Cargo" representedClassName="Cargo" syncable="YES" codeGenerationType="class">
+        <attribute name="cargo_image" optional="YES" attributeType="Binary"/>
+        <attribute name="invoice_number" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="weight_kg" optional="YES" attributeType="String"/>
+        <relationship name="parent_users" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="cargoes" inverseEntity="Users"/>
+    </entity>
+    <entity name="Driver" representedClassName="Driver" syncable="YES" codeGenerationType="class">
+        <attribute name="date_of_birth" optional="YES" attributeType="String"/>
+        <attribute name="driver_id" optional="YES" attributeType="String"/>
+        <attribute name="driver_image" optional="YES" attributeType="Binary"/>
+        <attribute name="experience_since" optional="YES" attributeType="String"/>
+        <attribute name="first_name" optional="YES" attributeType="String"/>
+        <attribute name="last_name" optional="YES" attributeType="String"/>
+        <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="driver" inverseEntity="Car"/>
+        <relationship name="parent_users" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="drivers" inverseEntity="Users"/>
+    </entity>
+    <entity name="Route" representedClassName="Route" syncable="YES" codeGenerationType="class">
+        <attribute name="distance_km" optional="YES" attributeType="String"/>
+        <attribute name="endpoint" optional="YES" attributeType="String"/>
+        <attribute name="route_id" optional="YES" attributeType="String"/>
+        <attribute name="starting_point" optional="YES" attributeType="String"/>
+        <attribute name="upload_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="upnoad_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="parent_users" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="routes" inverseEntity="Users"/>
+    </entity>
+    <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+        <relationship name="cargoes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cargo" inverseName="parent_users" inverseEntity="Cargo"/>
+        <relationship name="drivers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Driver" inverseName="parent_users" inverseEntity="Driver"/>
+        <relationship name="routes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Route" inverseName="parent_users" inverseEntity="Route"/>
+    </entity>
+    <elements>
+        <element name="Car" positionX="151.65625" positionY="-210.77734375" width="128" height="103"/>
+        <element name="Cargo" positionX="13.4765625" positionY="-264.91796875" width="128" height="133"/>
+        <element name="Driver" positionX="148.3125" positionY="-31.35546875" width="128" height="163"/>
+        <element name="Route" positionX="56.91796875" positionY="143.28515625" width="128" height="148"/>
+        <element name="Users" positionX="-155.8359375" positionY="-50.859375" width="128" height="118"/>
+    </elements>
+</model>

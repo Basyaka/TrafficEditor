@@ -10,6 +10,8 @@ import UIKit
 
 class RouteCreateViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var pointATextField: UITextField!
     @IBOutlet weak var pointBTextField: UITextField!
     @IBOutlet weak var uploadDateTextField: UITextField!
@@ -32,7 +34,14 @@ class RouteCreateViewController: UIViewController {
         createDatePickerForUnloadDateTextField()
         setUpElements()
         hideKeyboardByTap()
+        
+        registerForKeyboardNotification()
     }
+    
+    deinit {
+        removeKeyboardNotifications()
+    }
+
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         let error = validateFields()
@@ -106,5 +115,28 @@ extension RouteCreateViewController {
         infoLabel.text = text
         infoLabel.textColor = color
         infoLabel.alpha = 1
+    }
+}
+
+//MARK: - Notification for keyboard
+extension RouteCreateViewController {
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification , object: nil)
+    }
+    
+    func removeKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let keyboardFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrameSize.height)
+    }
+    
+    @objc func keyboardWillHide() {
+        scrollView.contentOffset = CGPoint.zero
     }
 }

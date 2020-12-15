@@ -33,6 +33,7 @@ class CargoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         sharedCargo.loadCargo()
+        sortBool = true
         sortButton.setTitle("A-Z", for: .normal)
         sharedCargo.sortCargoAZByName()
         tableView.reloadData()
@@ -77,6 +78,9 @@ extension CargoViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             sharedCargo.loadCargo()
+            sortBool = true
+            sortButton.setTitle("A-Z", for: .normal)
+            sharedCargo.sortCargoAZByName()
             tableView.reloadData()
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()

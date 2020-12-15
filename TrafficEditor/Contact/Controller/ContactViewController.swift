@@ -20,8 +20,6 @@ class ContactViewController: UIViewController {
     let sharedContact = ContactCoreDataMethods.shared
     
     private var sortBool = true
-    // we set a variable to hold the contentOffSet before scroll view scrolls
-    var lastContentOffset: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +36,7 @@ class ContactViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         sharedContact.loadContact()
+        sortBool = true
         sortButton.setTitle("A-Z", for: .normal)
         sharedContact.sortContactAZByLastName()
         tableView.reloadData()
@@ -67,7 +66,7 @@ class ContactViewController: UIViewController {
 extension ContactViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        if searchControl.selectedSegmentIndex == 0 { //last name
+        if searchControl.selectedSegmentIndex == 0 {//last name
             sharedContact.searchRequest(formatPredicate: "lastName CONTAINS[cd] %@", sortDescriptorKey: "lastName", searchBar: searchBar)
             tableView.reloadData()
         } else if searchControl.selectedSegmentIndex == 1 { //driver id
@@ -82,6 +81,9 @@ extension ContactViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             sharedContact.loadContact()
+            sortBool = true
+            sortButton.setTitle("A-Z", for: .normal)
+            sharedContact.sortContactAZByLastName()
             tableView.reloadData()
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
@@ -133,30 +135,6 @@ extension ContactViewController: UITableViewDelegate, UITableViewDataSource {
             sharedContact.contactModel = ContactCoreDataMethods.shared.contactArray[indexPath.row]
         }
     }
-    
-    //MARK: - Table View Scroll Logic
-    
-    // this delegate is called when the scrollView (i.e your UITableView) will start scrolling
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.lastContentOffset = scrollView.contentOffset.y
-    }
-    
-    // while scrolling this delegate is being called so you may now check which direction your scrollView is being scrolled to
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.lastContentOffset < scrollView.contentOffset.y {
-            // did move up
-            viewForSearchAndSort.isHidden = false
-            //            tableView.topAnchor.constraint(equalTo: viewForSearchAndSort.topAnchor).isActive = true
-        } else if self.lastContentOffset > scrollView.contentOffset.y {
-            // did move down
-            viewForSearchAndSort.isHidden = true
-            //            tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            //        } else {
-            // didn't move
-            //            viewForSearchAndSort.isHidden = false
-            //            tableView.topAnchor.constraint(equalTo: viewForSearchAndSort.topAnchor).isActive = true
-        }
-    }
 }
 
 //MARK: - Castomization
@@ -165,3 +143,4 @@ extension ContactViewController {
         sortButton.layer.cornerRadius = 10
     }
 }
+

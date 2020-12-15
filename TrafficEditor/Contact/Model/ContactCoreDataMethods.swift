@@ -20,9 +20,15 @@ class ContactCoreDataMethods {
     var contactModel: Contact?
     var account: Users?
     
-    func loadContact(with request: NSFetchRequest<Contact> = Contact.fetchRequest()) {
+    func loadContact(with request: NSFetchRequest<Contact> = Contact.fetchRequest(), predicate: NSPredicate?  = nil) {
         
-        request.predicate = NSPredicate(format: "parentUser.username MATCHES %@", account!.username!)
+        let parentPredicate = NSPredicate(format: "parentUser.username MATCHES %@", account!.username!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [parentPredicate, additionalPredicate])
+        } else {
+            request.predicate = parentPredicate
+        }
         
         do {
             contactArray = try context.fetch(request)
@@ -46,9 +52,9 @@ class ContactCoreDataMethods {
     
     func searchRequest(formatPredicate: String, sortDescriptorKey: String, searchBar: UISearchBar) {
         let request: NSFetchRequest<Contact> = Contact.fetchRequest()
-        request.predicate = NSPredicate(format: formatPredicate, searchBar.text!)
+        let predicate = NSPredicate(format: formatPredicate, searchBar.text!)
         request.sortDescriptors  = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
-        loadContact(with: request)
+        loadContact(with: request, predicate: predicate)
     }
     
     func checkingFetchRequest(format: String, argument: String) -> Bool {

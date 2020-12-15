@@ -63,6 +63,7 @@ class RouteViewAndEditViewController: UIViewController {
             
             isEnabledActiveUIElements(true)
             contentView.backgroundColor = .systemGray5
+            infoLabel.alpha = 0
             editButton.title = "Done"
             
         case false: //done
@@ -78,8 +79,6 @@ class RouteViewAndEditViewController: UIViewController {
                 isEnabledActiveUIElements(false)
                 
                 updateRouteInformation()
-                
-                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
@@ -135,6 +134,8 @@ extension RouteViewAndEditViewController {
             }
             
             sharedRoute.saveRoute()
+            contentView.backgroundColor = .systemBackground
+            showInfo("Successful data update.", color: .green)
         }
     }
 }
@@ -190,6 +191,7 @@ extension RouteViewAndEditViewController {
     }
 }
 
+//MARK: - Notification for keyboard
 extension RouteViewAndEditViewController {
     func registerForKeyboardNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification , object: nil)

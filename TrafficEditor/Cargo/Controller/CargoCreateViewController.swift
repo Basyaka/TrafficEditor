@@ -26,6 +26,7 @@ class CargoCreateViewController: UIViewController {
         
         setUpElements()
         hideKeyboardByTap()
+        
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {

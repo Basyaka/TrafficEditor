@@ -12,6 +12,7 @@ import CoreData
 class ContactCreateViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contactView: UIView!
     @IBOutlet weak var contactImage: UIImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -37,13 +38,13 @@ class ContactCreateViewController: UIViewController {
         setUpElements()
         createDatePickerForDateOfBirthTextField()
         reateDatePickerForExperienceTextField()
-        //        addObservers()
+        
+        registerForKeyboardNotification()
     }
     
-    
-    //    deinit {
-    //        removeObservers()
-    //    }
+    deinit {
+        removeKeyboardNotifications()
+    }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
@@ -139,30 +140,24 @@ extension ContactCreateViewController: UINavigationControllerDelegate, UIImagePi
 
 //MARK: - Notification for keyboard
 extension ContactCreateViewController {
-    
-    func addObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification , object: nil)
     }
     
-    func removeObservers() {
+    func removeKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    @objc func keyboardWillChange(notification: Notification) {
-        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
-            return
-        }
-        
-        if notification.name == UIResponder.keyboardWillShowNotification ||
-            notification.name == UIResponder.keyboardWillChangeFrameNotification {
-            view.frame.origin.y = -keyboardRect.height
-        } else {
-            view.frame.origin.y = 0
-        }
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let keyboardFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrameSize.height)
+    }
+    
+    @objc func keyboardWillHide() {
+        scrollView.contentOffset = CGPoint.zero
     }
 }
 

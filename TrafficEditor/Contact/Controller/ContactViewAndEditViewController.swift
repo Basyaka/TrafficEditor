@@ -11,6 +11,8 @@ import UIKit
 class ContactViewAndEditViewController: UIViewController {
     
     @IBOutlet weak var contactImage: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var changeImageButton: UIButton!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -38,6 +40,12 @@ class ContactViewAndEditViewController: UIViewController {
         setUpElements()
         createDatePickerForDateOfbirthTextField()
         createDatePickerForExperienceTextField()
+        
+        registerForKeyboardNotification()
+    }
+    
+    deinit {
+        removeKeyboardNotifications()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +64,8 @@ class ContactViewAndEditViewController: UIViewController {
             editBool = false
             
             isEnabledActiveUIElements(true)
-            view.backgroundColor = .systemGray5
+            contentView.backgroundColor = .systemGray5
+            infoLabel.alpha = 0
             editBarButton.title = "Done"
             
         case false: //done
@@ -72,9 +81,6 @@ class ContactViewAndEditViewController: UIViewController {
                 isEnabledActiveUIElements(false)
                 
                 updateContactInformation()
-                
-              
-               
             }
         }
     }
@@ -172,7 +178,8 @@ extension ContactViewAndEditViewController {
             }
             
             sharedContact.saveContact()
-            
+            contentView.backgroundColor = .systemBackground
+            showInfo("Successful data update.", color: .green)
         }
     }
 }
@@ -216,6 +223,28 @@ extension ContactViewAndEditViewController {
             return "Please fill in all fields."
         }
         return nil
+    }
+}
+
+extension ContactViewAndEditViewController {
+    func registerForKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification , object: nil)
+    }
+    
+    func removeKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let keyboardFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        scrollView.contentOffset = CGPoint(x: 0, y: keyboardFrameSize.height)
+    }
+    
+    @objc func keyboardWillHide() {
+        scrollView.contentOffset = CGPoint.zero
     }
 }
 

@@ -33,6 +33,7 @@ class RouteViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         sharedRoute.loadRoute()
+        sortBool = true
         sortButton.setTitle("A-Z", for: .normal)
         sharedRoute.sortRouteAZByPointA()
         tableView.reloadData()
@@ -78,6 +79,9 @@ extension RouteViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             sharedRoute.loadRoute()
+            sortBool = true
+            sortButton.setTitle("A-Z", for: .normal)
+            sharedRoute.sortRouteAZByPointA()
             tableView.reloadData()
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()

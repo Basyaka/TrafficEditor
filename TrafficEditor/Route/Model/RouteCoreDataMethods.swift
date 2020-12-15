@@ -20,10 +20,15 @@ class RouteCoreDataMethods {
     var routeModel: Route?
     var account: Users?
     
-    func loadRoute(with request: NSFetchRequest<Route> = Route.fetchRequest()) {
+    func loadRoute(with request: NSFetchRequest<Route> = Route.fetchRequest(), predicate: NSPredicate?  = nil) {
         
-        request.predicate = NSPredicate(format: "parentUser.username MATCHES %@", account!.username!)
+        let parentPredicate = NSPredicate(format: "parentUser.username MATCHES %@", account!.username!)
         
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [parentPredicate, additionalPredicate])
+        } else {
+            request.predicate = parentPredicate
+        }
         
         do {
             routeArray = try context.fetch(request)
@@ -42,9 +47,9 @@ class RouteCoreDataMethods {
     
     func searchRequest(formatPredicate: String, sortDescriptorKey: String, searchBar: UISearchBar) {
         let request: NSFetchRequest<Route> = Route.fetchRequest()
-        request.predicate = NSPredicate(format: formatPredicate, searchBar.text!)
+        let predicate = NSPredicate(format: formatPredicate, searchBar.text!)
         request.sortDescriptors  = [NSSortDescriptor(key: sortDescriptorKey, ascending: true)]
-        loadRoute(with: request)
+        loadRoute(with: request, predicate: predicate)
     }
     
     func checkingFetchRequest(format: String, argument: String) -> Bool {
